@@ -8,7 +8,8 @@ public class MoneySystem : MonoBehaviour {
     private static MoneySystem _instance;
     public int money;
     public  Text currency;
-    public int income = int.MaxValue;
+    public int baseIncome = 15000;
+    public int actualIncome;
 
 
     private static MoneySystem instance
@@ -97,6 +98,7 @@ public class MoneySystem : MonoBehaviour {
         instance.money += amount;
         SaveMoney();
     }
+
 
 }
 
