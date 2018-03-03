@@ -8,6 +8,7 @@ public class ArenaManager : Photon.PunBehaviour {
     private List<GameObject> playerZonesList = new List<GameObject>();
 
     static public ArenaManager instance;
+    public int distanceBetweenPlayers = 40;
 
     void Awake() {
         if(instance != null && instance != this)
@@ -30,7 +31,7 @@ public class ArenaManager : Photon.PunBehaviour {
 	}
 
     [PunRPC]
-    public void CreateArena(int nbPlayers, int distanceBetweenPlayers) {
+    public void CreateArena(int nbPlayers) {
 
         // calcul de l'angle séparant deux joueurs
         float angleBetweenPlayers = 2 * Mathf.PI / nbPlayers;
