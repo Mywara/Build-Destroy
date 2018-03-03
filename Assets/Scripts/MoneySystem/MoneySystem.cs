@@ -7,7 +7,7 @@ public class MoneySystem : MonoBehaviour {
 
     private static MoneySystem _instance;
     public int money;
-    public  Text currency;
+    //public  Text currency;
     public int baseIncome = 15000;
     public int actualIncome;
 
@@ -49,7 +49,7 @@ public class MoneySystem : MonoBehaviour {
     }
 
     // Use this for initialization
-    void Start () {
+    void Awake () {
 
         //Make sure the Gameobject is named MoneySystem.
         gameObject.name = "MoneySystem";
@@ -60,7 +60,7 @@ public class MoneySystem : MonoBehaviour {
 
         //Update Money
         actualIncome = baseIncome;
-        SaveMoney();
+        //SaveMoney();
     }
 
 
@@ -69,7 +69,7 @@ public class MoneySystem : MonoBehaviour {
     public void SaveMoney()
     {
             PlayerPrefs.SetInt("MoneySave", instance.money);
-            currency.text = "Money : " + money.ToString() + "$";
+            //currency.text = "Money : " + money.ToString() + "$";
     }
 
     //Checks if you have enough money to buy item with cost, if you do buy it and return true. Otherwise, return false.
@@ -78,7 +78,7 @@ public class MoneySystem : MonoBehaviour {
         if (instance.money - cost >= 0)
         {
             instance.money -= cost;
-            SaveMoney();
+            //SaveMoney();
             return true;
         }
         else
@@ -97,7 +97,7 @@ public class MoneySystem : MonoBehaviour {
     public void AddMoney(int amount)
     {
         instance.money += amount;
-        SaveMoney();
+        //SaveMoney();
     }
 
 

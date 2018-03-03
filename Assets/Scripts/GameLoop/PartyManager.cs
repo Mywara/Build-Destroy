@@ -19,6 +19,8 @@ public class PartyManager : Photon.PunBehaviour {
     public Canvas upgradeUI;
     public Text phaseNameUpgrade;
     public Text timerUpgrade;
+    public Text money;
+    public Text moneyUpgrade;
 
     private GameObject playerZone;
     private CameraController camController;
@@ -52,6 +54,7 @@ public class PartyManager : Photon.PunBehaviour {
         UpdateReadyButtonText();
         UpdateReadyButtonTextUpgrade();
         upgradeUI.enabled = false;
+        UpdateMoney();
     }
 
     // Use this for initialization
@@ -84,7 +87,15 @@ public class PartyManager : Photon.PunBehaviour {
         }
 		if(drawPhase)
         {
-            UpdateTimer(startPhaseTime + drawPhaseTime - Time.time);
+            if(PhotonNetwork.connected)
+            {
+                photonView.RPC("UpdateTimer", PhotonTargets.AllViaServer, startPhaseTime + drawPhaseTime - Time.time);
+            }
+            else
+            {
+                UpdateTimer(startPhaseTime + drawPhaseTime - Time.time);
+            }
+            
             //si on est dans la phase de pioche et que le timer à fini, ou que tous les joueurs sont rdy
             //on change de phase
             if (Time.time > startPhaseTime + drawPhaseTime || nbPlayerReady == nbMaxPlayer)
@@ -104,7 +115,15 @@ public class PartyManager : Photon.PunBehaviour {
         }
         else if (stealPhase)
         {
-            UpdateTimer(startPhaseTime + stealPhaseTime - Time.time);
+            if (PhotonNetwork.connected)
+            {
+                photonView.RPC("UpdateTimer", PhotonTargets.AllViaServer, startPhaseTime + stealPhaseTime - Time.time);
+            }
+            else
+            {
+                UpdateTimer(startPhaseTime + stealPhaseTime - Time.time);
+            }
+            
             if (Time.time > startPhaseTime + stealPhaseTime || nbPlayerReady == nbMaxPlayer)
             {
                 stealPhase = false;
@@ -122,7 +141,15 @@ public class PartyManager : Photon.PunBehaviour {
         }
         else if (buildPhase)
         {
-            UpdateTimer(startPhaseTime + buildPhaseTime - Time.time);
+            if (PhotonNetwork.connected)
+            {
+                photonView.RPC("UpdateTimer", PhotonTargets.AllViaServer, startPhaseTime + buildPhaseTime - Time.time);
+            }
+            else
+            {
+                UpdateTimer(startPhaseTime + buildPhaseTime - Time.time);
+            }
+            
             if (Time.time > startPhaseTime + buildPhaseTime || nbPlayerReady == nbMaxPlayer)
             {
                 buildPhase = false;
@@ -140,7 +167,15 @@ public class PartyManager : Photon.PunBehaviour {
         }
         else if (destructionPhase)
         {
-            UpdateTimer(startPhaseTime + destructionPhaseTime - Time.time);
+            if (PhotonNetwork.connected)
+            {
+                photonView.RPC("UpdateTimer", PhotonTargets.AllViaServer, startPhaseTime + destructionPhaseTime - Time.time);
+            }
+            else
+            {
+                UpdateTimer(startPhaseTime + destructionPhaseTime - Time.time);
+            }
+            
             if (Time.time > startPhaseTime + destructionPhaseTime || nbPlayerReady == nbMaxPlayer)
             {
                 destructionPhase = false;
@@ -158,7 +193,15 @@ public class PartyManager : Photon.PunBehaviour {
         }
         else if (upgradePhase)
         {
-            UpdateTimerUpgrade(startPhaseTime + upgradePhaseTime - Time.time);
+            if (PhotonNetwork.connected)
+            {
+                photonView.RPC("UpdateTimerUpgrade", PhotonTargets.AllViaServer, startPhaseTime + upgradePhaseTime - Time.time);
+            }
+            else
+            {
+                UpdateTimerUpgrade(startPhaseTime + upgradePhaseTime - Time.time);
+            }
+            
             if (Time.time > startPhaseTime + upgradePhaseTime || nbPlayerReady == nbMaxPlayer)
             {
                 upgradePhase = false;
@@ -182,11 +225,17 @@ public class PartyManager : Photon.PunBehaviour {
         if(PhotonNetwork.connected)
         {
             photonView.RPC("ChangeToBasicUI", PhotonTargets.AllViaServer);
+            photonView.RPC("AddMoney", PhotonTargets.AllViaServer, MoneySystem.instance.actualIncome);
         }
         else
         {
             ChangeToBasicUI();
+            if(PhotonNetwork.isMasterClient)
+            {
+                AddMoney(MoneySystem.instance.actualIncome);
+            }
         }
+
         DrawPhase();
     }
 
@@ -340,6 +389,7 @@ public class PartyManager : Photon.PunBehaviour {
         }
     }
 
+    [PunRPC]
     private void UpdateTimer(float countDown)
     {
         if (readyForNewPhase != null)
@@ -356,6 +406,7 @@ public class PartyManager : Photon.PunBehaviour {
         
     }
 
+    [PunRPC]
     private void UpdateTimerUpgrade(float countDown)
     {
         if (readyForNewPhaseUpgrade != null)
@@ -372,14 +423,15 @@ public class PartyManager : Photon.PunBehaviour {
 
     }
 
-    [PunRPC]
     //on désactive l'UI de base, pour mettre l'UI d'upgrade
+    [PunRPC]
     private void ChangeToUpgradeUI()
     {
         if(basicUI != null && upgradeUI != null)
         {
             basicUI.enabled = false;
             upgradeUI.enabled = true;
+            UpdateMoneyUpgrade();
         }
         else
         {
@@ -387,8 +439,8 @@ public class PartyManager : Photon.PunBehaviour {
         }
     }
 
-    [PunRPC]
     //on désactive l'UI d'upgrade, pour mettre l'UI de base
+    [PunRPC]
     private void ChangeToBasicUI()
     {
         if (basicUI != null && upgradeUI != null)
@@ -400,5 +452,33 @@ public class PartyManager : Photon.PunBehaviour {
         {
             Debug.Log("Missing basicUI or UpgradeUI on partyManager");
         }
+    }
+
+    //Met à jour le UI Text avec l'argent du joueur
+    private void UpdateMoney()
+    {
+        money.text = MoneySystem.GetMoney() + " $";
+    }
+
+    //Met à jour le UI Text du menu d'upgrade avec l'argent du joueur
+    private void UpdateMoneyUpgrade()
+    {
+        moneyUpgrade.text = "Budget : " + MoneySystem.GetMoney() + " $";
+    }
+
+    //A utliser pour ajouter de l'argent, ca met automatique à jour le UI text
+    [PunRPC]
+    private void AddMoney(int amount)
+    {
+        //Debug.Log("Amount of money to add : " + amount);
+        MoneySystem.instance.AddMoney(amount);
+        UpdateMoney();
+    }
+
+    //A utliser pour depenser de l'argent, ca met automatique à jour le UI text
+    private void BuyItem(int cost)
+    {
+        MoneySystem.instance.BuyItem(cost);
+        UpdateMoney();
     }
 }
