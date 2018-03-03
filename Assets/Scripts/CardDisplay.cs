@@ -21,4 +21,10 @@ public class CardDisplay : MonoBehaviour
         costText.text = card.cost;
         image.sprite = card.image;
     }
+
+    // When the mouse is clicked
+    public void OnMouseDown()
+    {
+        // Instantiate the GameObject stored in card.cardPrefab
+    }
 }
