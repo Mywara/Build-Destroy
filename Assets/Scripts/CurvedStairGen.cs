@@ -22,7 +22,8 @@ public class CurvedStairGen : MonoBehaviour
         int hauteur = hauteurScaler.GetNbr();
 
         Vector3 scaler = new Vector3(largeur, hauteur, longueur);
-        GameObject go = Instantiate(stair, new Vector3(-1000000, 0, 0), Quaternion.identity);
+        Vector3 origin = Input.mousePosition;
+        GameObject go = Instantiate(stair, origin, Quaternion.identity);
         go.transform.localScale += scaler;
     }
 
@@ -31,4 +32,15 @@ public class CurvedStairGen : MonoBehaviour
     {
 
     }
+
+    public void OnMouseDrag()
+    {
+        Vector3 cursorPoint = Input.mousePosition;
+        Vector3 current = stair.transform.position;
+        Vector3 movement = cursorPoint - current;
+
+        stair.transform.position += movement;
+
+    }
+
 }

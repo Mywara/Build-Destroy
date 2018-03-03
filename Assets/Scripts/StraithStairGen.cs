@@ -22,13 +22,24 @@ public class StraithStairGen: MonoBehaviour
         int hauteur = hauteurScaler.GetNbr();
 
         Vector3 scaler = new Vector3(largeur, hauteur, longueur);
-        GameObject go = Instantiate(sStair, new Vector3(-1000000, 0, 0), Quaternion.identity);
+        Vector3 origin = Input.mousePosition;
+        GameObject go = Instantiate(sStair, origin, Quaternion.identity);
         go.transform.localScale += scaler;
     }
 
     // Update is called once per frame
     void Update()
     {
+
+    }
+
+    public void OnMouseDrag()
+    {
+        Vector3 cursorPoint = Input.mousePosition;
+        Vector3 current = sStair.transform.position;
+        Vector3 movement = cursorPoint - current;
+
+        sStair.transform.position += movement;
 
     }
 }

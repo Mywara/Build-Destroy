@@ -27,4 +27,14 @@ public class TorusGen : MonoBehaviour
     {
 
     }
+
+    public void OnMouseDrag()
+    {
+        Vector3 cursorPoint = Input.mousePosition;
+        Vector3 current = torus.transform.position;
+        Vector3 movement = cursorPoint - current;
+
+        torus.transform.position += movement;
+
+    }
 }
