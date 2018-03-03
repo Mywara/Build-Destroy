@@ -48,7 +48,9 @@ public class CameraController : MonoBehaviour {
             distance += Time.deltaTime * zoomSpeed;
         }
 
+        //limite la distance entre la cam et la cible
         distance = Mathf.Clamp(distance, minDistance, maxDistance);
+        //limite l'angle de la camera
         rotX = ClampAngle(rotX, angleminVertical, angleMaxVertical);
         Quaternion toRotation = Quaternion.Euler(rotX, rotY, 0);
         Quaternion rotation = toRotation;
@@ -57,14 +59,16 @@ public class CameraController : MonoBehaviour {
         //not just rotating)
         if(targetToRotateAround != null)
         {
+            //fait bouger la cible de haut en bas
             targetToRotateAround.Translate(new Vector3(0, moveUp, 0));
             Vector3 negDistance = new Vector3(0, 0, -distance);
             Vector3 position = rotation * negDistance + targetToRotateAround.position;
+            //la camera ne peut pas descendre en dessous de y = 0
             if (position.y < 0)
             {
                 position.y = 0;
             }
-
+            //applique la nouvelle pos / rot de la cam
             transform.rotation = rotation;
             transform.position = position;
         }
