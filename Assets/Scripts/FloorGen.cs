@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class FloorGen : MonoBehaviour {
 
-    private const int MIN_WINTH = 1;
-    private const int MAX_WINTH = 10;
+    private const int MIN_WINTH = 0;
+    private const int MAX_WINTH = 9;
     public GameObject floor;
 	// Use this for initialization
 	void Start() {
@@ -14,7 +14,7 @@ public class FloorGen : MonoBehaviour {
         RandomGen longueurScaler = new RandomGen(MIN_WINTH, MAX_WINTH);
         int longueur = longueurScaler.GetNbr();
 
-        Vector3 scaler = new Vector3(largeur, 1, longueur);
+        Vector3 scaler = new Vector3(largeur, 0, longueur);
 
         GameObject go = Instantiate(floor, new Vector3(-1000000, 0, 0), Quaternion.identity);
         go.transform.localScale += scaler;

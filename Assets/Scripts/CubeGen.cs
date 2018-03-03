@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CubeGen : MonoBehaviour {
-    private const int MIN_SIDE = 1;
-    private const int MAX_SIDE = 3;
+    private const int MIN_SIDE = 0;
+    private const int MAX_SIDE = 2;
     public GameObject cube;
 	// Use this for initialization
 	void Start () {
