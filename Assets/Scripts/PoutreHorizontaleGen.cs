@@ -19,13 +19,24 @@ public class PoutreHorizontaleGen : MonoBehaviour
         int largeur = largueurScaler.GetNbr();
 
         Vector3 scaler = new Vector3(longueur, hauteur, largeur);
-        GameObject go = Instantiate(poutre, new Vector3(-1000000, 0, 0), Quaternion.identity);
+        Vector3 origin = Input.mousePosition;
+        GameObject go = Instantiate(poutre, origin, Quaternion.identity);
         go.transform.localScale += scaler;
     }
 
     // Update is called once per frame
     void Update()
     {
+
+    }
+
+    public void OnMouseDrag()
+    {
+        Vector3 cursorPoint = Input.mousePosition;
+        Vector3 current = poutre.transform.position;
+        Vector3 movement = cursorPoint - current;
+
+        poutre.transform.position += movement;
 
     }
 }

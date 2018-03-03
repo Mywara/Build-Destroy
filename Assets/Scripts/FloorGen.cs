@@ -15,8 +15,8 @@ public class FloorGen : MonoBehaviour {
         int longueur = longueurScaler.GetNbr();
 
         Vector3 scaler = new Vector3(largeur, 0, longueur);
-
-        GameObject go = Instantiate(floor, new Vector3(-1000000, 0, 0), Quaternion.identity);
+        Vector3 origin = Input.mousePosition;
+        GameObject go = Instantiate(floor, origin, Quaternion.identity);
         go.transform.localScale += scaler;
     }
 	
@@ -24,4 +24,14 @@ public class FloorGen : MonoBehaviour {
 	void Update () {
 		
 	}
+
+    public void OnMouseDrag()
+    {
+        Vector3 cursorPoint = Input.mousePosition;
+        Vector3 current = floor.transform.position;
+        Vector3 movement = cursorPoint - current;
+
+        floor.transform.position += movement;
+
+    }
 }

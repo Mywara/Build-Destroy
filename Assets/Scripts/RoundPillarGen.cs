@@ -18,13 +18,24 @@ public class RoundPillarGen : MonoBehaviour
         int hauteur = hauteurScaler.GetNbr();
 
         Vector3 scaler = new Vector3(radius, hauteur, radius);
-        GameObject go = Instantiate(roundPillar, new Vector3(100000, 1, 0), Quaternion.identity);
+        Vector3 origin = Input.mousePosition;
+        GameObject go = Instantiate(roundPillar, origin, Quaternion.identity);
         go.transform.localScale += scaler;
     }
 
     // Update is called once per frame
     void Update()
     {
+
+    }
+
+    public void OnMouseDrag()
+    {
+        Vector3 cursorPoint = Input.mousePosition;
+        Vector3 current = roundPillar.transform.position;
+        Vector3 movement = cursorPoint - current;
+
+        roundPillar.transform.position += movement;
 
     }
 }

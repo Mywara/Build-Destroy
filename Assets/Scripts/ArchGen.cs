@@ -18,7 +18,8 @@ public class ArchGen : MonoBehaviour {
         int radius = radiusScaler.GetNbr();
 
         Vector3 scaler = new Vector3(depth, radius, 1);
-        GameObject go = Instantiate(Arch, new Vector3(100000, 1, 0), Quaternion.identity);
+        Vector3 origin = Input.mousePosition;
+        GameObject go = Instantiate(Arch, origin, Quaternion.identity);
         go.transform.localScale += scaler;
 
 	}
@@ -27,4 +28,13 @@ public class ArchGen : MonoBehaviour {
 	void Update () {
 		
 	}
+    public void OnMouseDrag()
+    {
+        Vector3 cursorPoint = Input.mousePosition;
+        Vector3 current = Arch.transform.position;
+        Vector3 movement = cursorPoint - current;
+
+        Arch.transform.position += movement;
+
+    }
 }

@@ -21,14 +21,24 @@ public class RecPillarGen : MonoBehaviour
         int longueur = longueurScaler.GetNbr();
 
         Vector3 scaler = new Vector3(longueur, hauteur, largeur);
-
-        GameObject go = Instantiate(pillar, new Vector3(-1000000, 0, 0), Quaternion.identity);
+        Vector3 origin = Input.mousePosition;
+        GameObject go = Instantiate(pillar, origin, Quaternion.identity);
         go.transform.localScale += scaler;
     }
 
     // Update is called once per frame
     void Update()
     {
+
+    }
+
+    public void OnMouseDrag()
+    {
+        Vector3 cursorPoint = Input.mousePosition;
+        Vector3 current = pillar.transform.position;
+        Vector3 movement = cursorPoint - current;
+
+        pillar.transform.position += movement;
 
     }
 }

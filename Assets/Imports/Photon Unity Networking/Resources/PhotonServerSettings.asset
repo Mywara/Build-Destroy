@@ -27,9 +27,21 @@ MonoBehaviour:
   NetworkLogging: 1
   RunInBackground: 1
   RpcList:
+<<<<<<< HEAD
   - Chat
   - CreateArena
   - DestroyRpc
+=======
+  - AddMoney
+  - AddPlayerName
+  - BuildPhase
+  - ChangeToBasicUI
+  - ChangeToUpgradeUI
+  - Chat
+  - DestroyRpc
+  - DestructionPhase
+  - DrawPhase
+>>>>>>> master
   - InstantiateRpc
   - NewPlayerRdy
   - PickupItemInit
@@ -38,6 +50,7 @@ MonoBehaviour:
   - PunRespawn
   - RequestForPickupItems
   - RequestForPickupTimes
+<<<<<<< HEAD
   - AddMoney
   - AddPlayerName
   - BuildPhase
@@ -45,6 +58,8 @@ MonoBehaviour:
   - ChangeToUpgradeUI
   - DestructionPhase
   - DrawPhase
+=======
+>>>>>>> master
   - ResetPhase
   - StartingGame
   - StealPhase

@@ -20,13 +20,24 @@ public class WallGen : MonoBehaviour
         int longueur = longueurScaler.GetNbr();
 
         Vector3 scaler = new Vector3(longueur, largeur, 0);
-        GameObject go = Instantiate(wall, new Vector3(-1000000, 0, 0), Quaternion.identity);
+        Vector3 origin = Input.mousePosition;
+        GameObject go = Instantiate(wall, origin, Quaternion.identity);
         go.transform.localScale += scaler;
     }
 
     // Update is called once per frame
     void Update()
     {
+
+    }
+
+    public void OnMouseDrag()
+    {
+        Vector3 cursorPoint = Input.mousePosition;
+        Vector3 current = wall.transform.position;
+        Vector3 movement = cursorPoint - current;
+
+        wall.transform.position += movement;
 
     }
 }
