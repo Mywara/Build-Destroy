@@ -47,11 +47,11 @@ public class CardManager : MonoBehaviour
 
     // Variables declarations
     public List<Card> cardList; // List of possible cards
-    private List<GameObject> cardInHand; // List of the UI objects in the player's hand
+    public List<GameObject> cardInHand; // List of the UI objects in the player's hand
     public GameObject cardSlotPrefab; // Prefab to the card slot, needed to add a card to an existing hand
     public GridLayoutGroup grid; // The gridLayoutGroup is the scalable hand of the player
 
-    private void Start()
+    private void Awake()
     {
         DrawHand();
     }
@@ -76,8 +76,7 @@ public class CardManager : MonoBehaviour
             UnityEngine.Random.InitState(Time.frameCount);
             var ranNum = UnityEngine.Random.Range(0, cardList.Count);
             Card selectedCard = cardList[ranNum];
-            _cd.card = selectedCard;
-            _cd.SetCard();
+            _cd.SetCard(selectedCard);
         }
     }
 
@@ -93,8 +92,7 @@ public class CardManager : MonoBehaviour
         UnityEngine.Random.InitState(Time.frameCount);
         var ranNum = UnityEngine.Random.Range(0, cardList.Count);
         Card selectedCard = cardList[ranNum];
-        _cd.card = selectedCard;
-        _cd.SetCard();
+        _cd.SetCard(selectedCard);
     }
 
     /// <summary>

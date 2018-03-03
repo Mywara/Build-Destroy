@@ -13,16 +13,16 @@ public class CardDisplay : MonoBehaviour
     // Use this for initialization
     private void Start()
     {
-        SetCard();
-        b.GetComponentInChildren<Button>();
-        blockPrefab = card.blockPrefab;
+
     }
 
     /// <summary>
     /// Sets the cost text and the image to the correct values
     /// </summary>
-    public void SetCard()
+    public void SetCard(Card card)
     {
+        this.card = card;
+        this.blockPrefab = card.blockPrefab;
         costText.text = card.cost;
         b.image.sprite = card.image;
     }
@@ -38,7 +38,7 @@ public class CardDisplay : MonoBehaviour
         //GameObject item = Instantiate(prefab, Vector3.zero, Quaternion.identity);
         //mettre la souris en enfant
         //Destroy(cardPrefab);
-
+         
         mousePos = Input.mousePosition;
         GameObject item = Instantiate(blockPrefab, Vector3.zero, Quaternion.identity);
         item.transform.position = mousePos;
