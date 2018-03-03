@@ -4,6 +4,45 @@ using System.Linq;
 
 public class CardManager : MonoBehaviour
 {
+    // Singleton Structure
+    #region singleton
+    public static CardManager _instance;
+
+    private static CardManager instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                if (GameObject.Find("MoneySystem"))
+                {
+                    GameObject g = GameObject.Find("MoneySystem");
+                    if (g.GetComponent<CardManager>())
+                    {
+                        _instance = g.GetComponent<CardManager>();
+                    }
+                    else
+                    {
+                        _instance = g.AddComponent<CardManager>();
+                    }
+                }
+                else
+                {
+                    GameObject g = new GameObject();
+                    g.name = "MoneySystem";
+                    _instance = g.AddComponent<CardManager>();
+                }
+            }
+
+            return _instance;
+        }
+
+        set
+        {
+            _instance = value;
+        }
+    }
+    #endregion singleton
 
     // Variables declarations
     public List<Card> cardList; // List of possible cards
@@ -33,7 +72,7 @@ public class CardManager : MonoBehaviour
             cardInHand.Add(obj);
         }
 
-        foreach(var obj in cardInHand)
+        foreach (var obj in cardInHand)
         {
             CardDisplay _cd = obj.GetComponent<CardDisplay>();
 

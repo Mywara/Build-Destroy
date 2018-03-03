@@ -13,14 +13,10 @@ public class CardDisplay : MonoBehaviour
     public GameObject cardSlotPrefab;
     public GridLayoutGroup grid;
 
-    public CardManager _cm;
-
     // Use this for initialization
     private void Start()
     {
         SetCard();
-
-        _cm = FindObjectOfType<CardManager>();
     }
 
     public void SetCard()
@@ -36,7 +32,7 @@ public class CardDisplay : MonoBehaviour
         item.transform.localScale = new Vector3(1, 1, 1);
         item.transform.localPosition = Vector3.zero;
 
-        _cm.DrawCard(item);
+        CardManager._instance.DrawCard(item);
     }
 
     // When the mouse is clicked
