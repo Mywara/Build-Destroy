@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -431,6 +431,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7b1bc2a6473c3642a1132d22aa97fa5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelToLoad: Playground
+  nbPlayers: 6
+  distanceBetweenPlayers: 50
 --- !u!1 &1231263148
 GameObject:
   m_ObjectHideFlags: 0

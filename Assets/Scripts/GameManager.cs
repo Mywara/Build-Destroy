@@ -3,25 +3,27 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-    public class GameManager : Photon.PunBehaviour {
-        public static GameManager instance;
+public class GameManager : Photon.PunBehaviour
+{
+    public static GameManager instance;
+    public string levelToLoad = "Playground";
+    public int nbPlayers = 6;
 
-        void Awake()
+    void Awake()
+    {
+        if (instance != null)
         {
-       
-            if (instance != null)
-            {
-                DestroyImmediate(gameObject);
-                return;
-            }
-            DontDestroyOnLoad(gameObject);
-            instance = this;
+            DestroyImmediate(gameObject);
+            return;
         }
+        DontDestroyOnLoad(gameObject);
+        instance = this;
+    }
 
-        void Start()
-        {
+    void Start()
+    {
         PhotonNetwork.ConnectUsingSettings("Version_1.0");
-        }
+    }
 
     public void JoinGame()
     {
@@ -35,9 +37,17 @@ using UnityEngine;
     {
         if (PhotonNetwork.isMasterClient)
         {
-            PhotonNetwork.LoadLevel("SceneTest");
+            PhotonNetwork.LoadLevel(levelToLoad);
         }
     }
 
+    void OnLevelWasLoaded(int levelNumber)
+    {
+        if (!PhotonNetwork.inRoom) return;
+        if(levelToLoad.Equals("Playground") && PhotonNetwork.isMasterClient)
+        {
+            ArenaManager.instance.photonView.RPC("CreateArena", PhotonTargets.AllBufferedViaServer, nbPlayers);
+        }
+    }
 }
 
