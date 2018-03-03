@@ -18,9 +18,6 @@ public class Upgrades : MonoBehaviour {
     public void Awake()
     {
         cost_inc_inc = (int)MoneySystem.instance.actualIncome * 2 / 3;
-        Debug.Log(cost_inc_inc);
-        Debug.Log(MoneySystem.instance.actualIncome);
-        Debug.Log((int)MoneySystem.instance.actualIncome * 2 / 3);
 
         costIncInc.text = "Cost : " + cost_inc_inc;
         costMoreCards.text = "Cost : " + cost_more_cards;

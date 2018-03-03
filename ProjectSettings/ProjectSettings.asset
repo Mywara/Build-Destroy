@@ -633,9 +633,9 @@ PlayerSettings:
     UNet: 1
   facebookSdkVersion: 7.9.4
   apiCompatibilityLevel: 2
-  cloudProjectId: 9947b018-dafa-407e-a600-553e84a5b144
-  projectName: Build&Destroy
-  organizationId: mywa
+  cloudProjectId: 0e066b91-6723-47e6-8bc5-5c1290126bd6
+  projectName: Build&Destroy (1)
+  organizationId: mostlaurentcyr
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
   disableOldInputManagerSupport: 0
