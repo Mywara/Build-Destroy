@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 33760908183587956}
   - component: {fileID: 114587957499953708}
   - component: {fileID: 64993542428589486}
+  - component: {fileID: 114649240879896090}
   m_Layer: 0
   m_Name: Door
   m_TagString: Untagged
@@ -38,7 +39,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1015485233289602}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 463.13, y: 259.95, z: -59.13}
+  m_LocalPosition: {x: -0.49735534, y: -1.0216988, z: -59.13}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -58,7 +59,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 55296d1b6ee54e14e8eb4648d4b448ee, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -688,6 +689,17 @@ MonoBehaviour:
   m_selectedFaces: 
   m_SelectedEdges: []
   m_selectedTriangles: 
+--- !u!114 &114649240879896090
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1015485233289602}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da54fbfafcb68ba469e3798277523a0f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114987225025110888
 MonoBehaviour:
   m_ObjectHideFlags: 1
