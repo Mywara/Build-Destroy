@@ -42,7 +42,7 @@ public class RoomManager : Photon.PunBehaviour {
         string name = joinRoomText.text;
         RoomOptions ro = new RoomOptions();
         ro.MaxPlayers = 4;
-        PhotonNetwork.JoinOrCreateRoom(name, ro, TypedLobby.Default);
+        PhotonNetwork.JoinRoom(name);
     }
 
     public override void OnJoinedRoom()
