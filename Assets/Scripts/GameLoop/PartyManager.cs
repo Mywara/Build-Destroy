@@ -12,8 +12,13 @@ public class PartyManager : Photon.PunBehaviour {
     public float upgradePhaseTime = 5f;
     public Text phaseName;
     public Button readyForNewPhase;
-
+    public Button readyForNewPhaseUpgrade;
+    public Text timer;
     public ArenaManager arenaManager;
+    public Canvas basicUI;
+    public Canvas upgradeUI;
+    public Text phaseNameUpgrade;
+    public Text timerUpgrade;
 
     private GameObject playerZone;
     private int PlayerID = 1;
@@ -42,7 +47,10 @@ public class PartyManager : Photon.PunBehaviour {
 
         nbPlayerReady = 0;
         readyForNewPhase.GetComponent<Image>().color = Color.red;
+        readyForNewPhaseUpgrade.GetComponent<Image>().color = Color.red;
         UpdateReadyButtonText();
+        UpdateReadyButtonTextUpgrade();
+        upgradeUI.enabled = false;
     }
 
     // Use this for initialization
@@ -68,82 +76,92 @@ public class PartyManager : Photon.PunBehaviour {
         }
 		if(drawPhase)
         {
+            UpdateTimer(startPhaseTime + drawPhaseTime - Time.time);
             //si on est dans la phase de pioche et que le timer à fini, ou que tous les joueurs sont rdy
             //on change de phase
             if (Time.time > startPhaseTime + drawPhaseTime || nbPlayerReady == nbMaxPlayer)
             {
                 drawPhase = false;
-                photonView.RPC("ResetPhase", PhotonTargets.AllViaServer);
                 if (PhotonNetwork.connected)
                 {
+                    photonView.RPC("ResetPhase", PhotonTargets.AllViaServer);
                     photonView.RPC("StealPhase", PhotonTargets.AllViaServer);
                 }
                 else
                 {
+                    ResetPhase();
                     StealPhase();
                 } 
             }
         }
         else if (stealPhase)
         {
+            UpdateTimer(startPhaseTime + stealPhaseTime - Time.time);
             if (Time.time > startPhaseTime + stealPhaseTime || nbPlayerReady == nbMaxPlayer)
             {
                 stealPhase = false;
-                photonView.RPC("ResetPhase", PhotonTargets.AllViaServer);
                 if (PhotonNetwork.connected)
                 {
+                    photonView.RPC("ResetPhase", PhotonTargets.AllViaServer);
                     photonView.RPC("BuildPhase", PhotonTargets.AllViaServer);
                 }
                 else
                 {
+                    ResetPhase();
                     BuildPhase();
                 }
             }
         }
         else if (buildPhase)
         {
+            UpdateTimer(startPhaseTime + buildPhaseTime - Time.time);
             if (Time.time > startPhaseTime + buildPhaseTime || nbPlayerReady == nbMaxPlayer)
             {
                 buildPhase = false;
-                photonView.RPC("ResetPhase", PhotonTargets.AllViaServer);
                 if (PhotonNetwork.connected)
                 {
+                    photonView.RPC("ResetPhase", PhotonTargets.AllViaServer);
                     photonView.RPC("DestructionPhase", PhotonTargets.AllViaServer);
                 }
                 else
                 {
+                    ResetPhase();
                     DestructionPhase();
                 }
             }
         }
         else if (destructionPhase)
         {
+            UpdateTimer(startPhaseTime + destructionPhaseTime - Time.time);
             if (Time.time > startPhaseTime + destructionPhaseTime || nbPlayerReady == nbMaxPlayer)
             {
                 destructionPhase = false;
-                photonView.RPC("ResetPhase", PhotonTargets.AllViaServer);
                 if (PhotonNetwork.connected)
                 {
+                    photonView.RPC("ResetPhase", PhotonTargets.AllViaServer);
                     photonView.RPC("UpgradePhase", PhotonTargets.AllViaServer);
                 }
                 else
                 {
+                    ResetPhase();
                     UpgradePhase();
                 }
             }
         }
         else if (upgradePhase)
         {
+            UpdateTimerUpgrade(startPhaseTime + upgradePhaseTime - Time.time);
             if (Time.time > startPhaseTime + upgradePhaseTime || nbPlayerReady == nbMaxPlayer)
             {
                 upgradePhase = false;
-                photonView.RPC("ResetPhase", PhotonTargets.AllViaServer);
                 if (PhotonNetwork.connected)
                 {
+                    photonView.RPC("ResetPhase", PhotonTargets.AllViaServer);
                     photonView.RPC("Turn", PhotonTargets.AllViaServer);
                 }
                 else
                 {
+                    ResetPhase();
                     Turn();
                 }
             }
@@ -153,6 +171,14 @@ public class PartyManager : Photon.PunBehaviour {
     private void Turn()
     {
         Debug.Log("Turn Started");
+        if(PhotonNetwork.connected)
+        {
+            photonView.RPC("ChangeToBasicUI", PhotonTargets.AllViaServer);
+        }
+        else
+        {
+            ChangeToBasicUI();
+        }
         DrawPhase();
     }
 
@@ -191,8 +217,16 @@ public class PartyManager : Photon.PunBehaviour {
     [PunRPC]
     private void UpgradePhase()
     {
+        if (PhotonNetwork.connected)
+        {
+            photonView.RPC("ChangeToUpgradeUI", PhotonTargets.AllViaServer);
+        }
+        else
+        {
+            ChangeToUpgradeUI();
+        }
         startPhaseTime = Time.time;
-        UpdatePhaseName("Upgrade Phase");
+        UpdatePhaseNameUpgrade("Upgrade Phase");
         upgradePhase = true;
     }
 
@@ -208,7 +242,19 @@ public class PartyManager : Photon.PunBehaviour {
         }
     }
 
-    
+    private void UpdatePhaseNameUpgrade(string newText)
+    {
+        if (phaseName != null)
+        {
+            phaseNameUpgrade.text = newText;
+        }
+        else
+        {
+            Debug.Log("No UI.text linked to the partyManager");
+        }
+    }
+
+
     public void Ready()
     {
         if(iAmReady)
@@ -227,11 +273,12 @@ public class PartyManager : Photon.PunBehaviour {
             NewPlayerRdy();
         }
         //modification visuel du bouton pret -> rouge = pas pret / vert = pret
-        if(readyForNewPhase != null)
+        if(readyForNewPhase != null && readyForNewPhaseUpgrade != null)
         {
             if(iAmReady)
             {
                 readyForNewPhase.GetComponent<Image>().color = Color.green;
+                readyForNewPhaseUpgrade.GetComponent<Image>().color = Color.green;
             }
         }
         else
@@ -246,6 +293,7 @@ public class PartyManager : Photon.PunBehaviour {
         nbPlayerReady++;
         //Debug.Log("nb player ready / max player : " + nbPlayerReady + " / " + nbMaxPlayer);
         UpdateReadyButtonText();
+        UpdateReadyButtonTextUpgrade();
     }
 
     //reset la parametre au changement de phase
@@ -255,11 +303,94 @@ public class PartyManager : Photon.PunBehaviour {
         iAmReady = false;
         nbPlayerReady = 0;
         readyForNewPhase.GetComponent<Image>().color = Color.red;
+        readyForNewPhaseUpgrade.GetComponent<Image>().color = Color.red;
         UpdateReadyButtonText();
+        UpdateReadyButtonTextUpgrade();
     }
 
     private void UpdateReadyButtonText()
     {
-        readyForNewPhase.GetComponentInChildren<Text>().text = "Ready ( " + nbPlayerReady + " / " + nbMaxPlayer + " )";
+        if(readyForNewPhase != null)
+        {
+            readyForNewPhase.GetComponentInChildren<Text>().text = "Ready ( " + nbPlayerReady + " / " + nbMaxPlayer + " )";
+        }
+        else
+        {
+            Debug.Log("No ready for next phase button");
+        }
+    }
+
+    private void UpdateReadyButtonTextUpgrade()
+    {
+        if (readyForNewPhaseUpgrade != null)
+        {
+            readyForNewPhaseUpgrade.GetComponentInChildren<Text>().text = "Ready ( " + nbPlayerReady + " / " + nbMaxPlayer + " )";
+        }
+        else
+        {
+            Debug.Log("No ready for next phase button");
+        }
+    }
+
+    private void UpdateTimer(float countDown)
+    {
+        if (readyForNewPhase != null)
+        {
+            if(countDown>=0)
+            {
+                timer.GetComponentInChildren<Text>().text = string.Format("{0:0}:{1:00}", Mathf.Floor(countDown / 60), countDown % 60);
+            }
+        }
+        else
+        {
+            Debug.Log("No ready for next phase button");
+        }
+        
+    }
+
+    private void UpdateTimerUpgrade(float countDown)
+    {
+        if (readyForNewPhaseUpgrade != null)
+        {
+            if (countDown >= 0)
+            {
+                timerUpgrade.GetComponentInChildren<Text>().text = string.Format("{0:0}:{1:00}", Mathf.Floor(countDown / 60), countDown % 60);
+            }
+        }
+        else
+        {
+            Debug.Log("No ready for next phase button");
+        }
+
+    }
+
+    [PunRPC]
+    //on désactive l'UI de base, pour mettre l'UI d'upgrade
+    private void ChangeToUpgradeUI()
+    {
+        if(basicUI != null && upgradeUI != null)
+        {
+            basicUI.enabled = false;
+            upgradeUI.enabled = true;
+        }
+        else
+        {
+            Debug.Log("Missing basicUI or UpgradeUI on partyManager");
+        }
+    }
+
+    [PunRPC]
+    //on désactive l'UI d'upgrade, pour mettre l'UI de base
+    private void ChangeToBasicUI()
+    {
+        if (basicUI != null && upgradeUI != null)
+        {
+            basicUI.enabled = true;
+            upgradeUI.enabled = false;
+        }
+        else
+        {
+            Debug.Log("Missing basicUI or UpgradeUI on partyManager");
+        }
     }
 }

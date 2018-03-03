@@ -45,4 +45,6 @@ MonoBehaviour:
   - Turn
   - UpgradePhase
   - ResetPhase
+  - ChangeToBasicUI
+  - ChangeToUpgradeUI
   DisableAutoOpenWizard: 1
