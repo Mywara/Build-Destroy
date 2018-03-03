@@ -69,7 +69,7 @@ public class CardManager : MonoBehaviour
             cardInHand.Add(obj);
         }
 
-        if (cardInHand.Count < hand)
+        if(cardInHand.Count < hand)
         {
             GameObject item = Instantiate(cardSlotPrefab, Vector3.zero, Quaternion.identity);
             item.transform.SetParent(grid.transform, false);
@@ -77,16 +77,6 @@ public class CardManager : MonoBehaviour
             item.transform.localPosition = Vector3.zero;
 
             cardInHand.Add(item);
-        }
-        // Removes the extra cards if the player has too many in their hands following a temporary upgrade
-        else if (cardInHand.Count > hand)
-        {
-            while(cardInHand.Count > hand)
-            {
-                var item = cardInHand[cardInHand.Count - 1];
-                cardInHand.Remove(item);
-                Destroy(item);
-            }
         }
 
         // Randomly assign a card in each slot
