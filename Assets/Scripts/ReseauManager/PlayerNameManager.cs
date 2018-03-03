@@ -8,12 +8,8 @@ public class PlayerNameManager : MonoBehaviour {
 
     static string playerNamePrefKey = "PlayerName";
    
-
-
     void Start()
     {
-
-
         string defaultName = "";
         InputField  _inputField = this.GetComponentInChildren<InputField>();
         if (_inputField != null)
@@ -24,7 +20,6 @@ public class PlayerNameManager : MonoBehaviour {
                 _inputField.text = defaultName;
             }
         }
-
 
         PhotonNetwork.playerName = defaultName;
     }
@@ -37,6 +32,4 @@ public class PlayerNameManager : MonoBehaviour {
 
         PlayerPrefs.SetString(playerNamePrefKey, value);
     }
-
-
 }
