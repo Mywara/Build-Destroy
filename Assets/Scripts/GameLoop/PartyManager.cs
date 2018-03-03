@@ -5,12 +5,12 @@ using UnityEngine.UI;
 
 public class PartyManager : Photon.PunBehaviour {
 
-    public float drawPhaseTime = 10f;
-    public float stealPhaseTime = 30f;
-    public float buildPhaseTime = 120f;
-    public float destructionPhaseTime = 120f;
-    public float upgradePhaseTime = 30f;
-    public float waittingToStartTime = 10f;
+    public float drawPhaseTime = 5f;
+    public float stealPhaseTime = 5f;
+    public float buildPhaseTime = 5f;
+    public float destructionPhaseTime = 5f;
+    public float upgradePhaseTime = 5f;
+    public float waittingToStartTime = 5f;
     public Text phaseName;
     public Button readyForNewPhase;
     public Button readyForNewPhaseUpgrade;
@@ -285,12 +285,14 @@ public class PartyManager : Photon.PunBehaviour {
             if(PhotonNetwork.isMasterClient)
             {
                 photonView.RPC("AddMoney", PhotonTargets.AllViaServer, MoneySystem.instance.actualIncome);
+                upgcost.showIncome();
             }
         }
         else
         {
             ChangeToBasicUI();
             AddMoney(MoneySystem.instance.actualIncome);
+            upgcost.showIncome();
         }
 
         DrawPhase();
@@ -299,6 +301,7 @@ public class PartyManager : Photon.PunBehaviour {
     [PunRPC]
     private void DrawPhase()
     {
+        
         startPhaseTime = Time.time;
         UpdatePhaseName("Draw Phase");
         drawPhase = true;
@@ -307,6 +310,7 @@ public class PartyManager : Photon.PunBehaviour {
     [PunRPC]
     private void StealPhase()
     {
+        upgcost.eraseIncome();
         startPhaseTime = Time.time;
         UpdatePhaseName("Steal Phase");
         stealPhase = true;
