@@ -50,21 +50,33 @@ public class CardManager : MonoBehaviour
     public List<GameObject> cardInHand; // List of the UI objects in the player's hand
     public GameObject cardSlotPrefab; // Prefab to the card slot, needed to add a card to an existing hand
     public GridLayoutGroup grid; // The gridLayoutGroup is the scalable hand of the player
+    public int handSize = 5;
 
     private void Awake()
     {
-        DrawHand();
+        DrawHand(handSize);
     }
 
     /// <summary>
     /// Method to be called when you need to draw a hand of card
     /// </summary>
-    public void DrawHand()
+    /// <param name="hand">Should be the handSize variable</param>
+    public void DrawHand(int hand)
     {
         // Finds all of the card slots in the player's UI
         foreach (var obj in GameObject.FindObjectsOfType<GameObject>().Where(o => o.tag == "Cards"))
         {
             cardInHand.Add(obj);
+        }
+
+        if(cardInHand.Count < hand)
+        {
+            GameObject item = Instantiate(cardSlotPrefab, Vector3.zero, Quaternion.identity);
+            item.transform.SetParent(grid.transform, false);
+            item.transform.localScale = new Vector3(1, 1, 1);
+            item.transform.localPosition = Vector3.zero;
+
+            cardInHand.Add(item);
         }
 
         // Randomly assign a card in each slot
@@ -113,5 +125,10 @@ public class CardManager : MonoBehaviour
         var ranNum = UnityEngine.Random.Range(0, cardList.Count);
         Card selectedCard = cardList[ranNum];
         return selectedCard;
+    }
+
+    public void HandExtension()
+    {
+        this.handSize++;
     }
 }
