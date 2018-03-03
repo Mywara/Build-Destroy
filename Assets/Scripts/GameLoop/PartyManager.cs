@@ -489,6 +489,7 @@ public class PartyManager : Photon.PunBehaviour {
             basicUI.enabled = false;
             upgradeUI.enabled = true;
             UpdateMoneyUpgrade();
+            upgcost.updateCostText();
         }
         else
         {
