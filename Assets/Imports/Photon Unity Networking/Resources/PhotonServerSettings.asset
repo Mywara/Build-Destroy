@@ -47,4 +47,8 @@ MonoBehaviour:
   - ResetPhase
   - ChangeToBasicUI
   - ChangeToUpgradeUI
+  - UpdateTimer
+  - UpdateTimerUpgrade
+  - AddMoney
+  - StartingGame
   DisableAutoOpenWizard: 1

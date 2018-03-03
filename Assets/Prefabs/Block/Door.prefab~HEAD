@@ -9,21 +9,22 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1015485233289602}
+  m_RootGameObject: {fileID: 1509722702727678}
   m_IsPrefabParent: 1
---- !u!1 &1015485233289602
+--- !u!1 &1509722702727678
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4711120064767644}
-  - component: {fileID: 114987225025110888}
-  - component: {fileID: 23422740735618928}
-  - component: {fileID: 33760908183587956}
-  - component: {fileID: 114587957499953708}
-  - component: {fileID: 64993542428589486}
+  - component: {fileID: 4570375769765360}
+  - component: {fileID: 114883218078011588}
+  - component: {fileID: 23263766565945634}
+  - component: {fileID: 33536754889912866}
+  - component: {fileID: 114573021556107132}
+  - component: {fileID: 64108632867360098}
+  - component: {fileID: 54781777561270194}
   m_Layer: 0
   m_Name: Door
   m_TagString: Untagged
@@ -31,25 +32,25 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 127
   m_IsActive: 1
---- !u!4 &4711120064767644
+--- !u!4 &4570375769765360
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1015485233289602}
+  m_GameObject: {fileID: 1509722702727678}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 463.13, y: 259.95, z: -59.13}
+  m_LocalPosition: {x: 472, y: 269, z: -115}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!23 &23422740735618928
+--- !u!23 &23263766565945634
 MeshRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1015485233289602}
+  m_GameObject: {fileID: 1509722702727678}
   m_Enabled: 1
   m_CastShadows: 2
   m_ReceiveShadows: 1
@@ -78,19 +79,34 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!33 &33760908183587956
+--- !u!33 &33536754889912866
 MeshFilter:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1015485233289602}
+  m_GameObject: {fileID: 1509722702727678}
   m_Mesh: {fileID: 0}
---- !u!64 &64993542428589486
+--- !u!54 &54781777561270194
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1509722702727678}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!64 &64108632867360098
 MeshCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1015485233289602}
+  m_GameObject: {fileID: 1509722702727678}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
@@ -99,12 +115,12 @@ MeshCollider:
   m_CookingOptions: 14
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 0}
---- !u!114 &114587957499953708
+--- !u!114 &114573021556107132
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1015485233289602}
+  m_GameObject: {fileID: 1509722702727678}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 185759285, guid: 0472bdc8d6d15384d98f22ee34302f9c, type: 3}
@@ -688,12 +704,12 @@ MonoBehaviour:
   m_selectedFaces: 
   m_SelectedEdges: []
   m_selectedTriangles: 
---- !u!114 &114987225025110888
+--- !u!114 &114883218078011588
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1015485233289602}
+  m_GameObject: {fileID: 1509722702727678}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 16342205, guid: 0472bdc8d6d15384d98f22ee34302f9c, type: 3}
