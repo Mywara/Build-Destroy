@@ -22,6 +22,7 @@ public class PartyManager : Photon.PunBehaviour {
     public Text timerUpgrade;
     public Text money;
     public Text moneyUpgrade;
+    public Upgrades upgcost;
 
     private GameObject playerZone;
     private CameraController camController;
@@ -493,6 +494,7 @@ public class PartyManager : Photon.PunBehaviour {
         {
             Debug.Log("Missing basicUI or UpgradeUI on partyManager");
         }
+
     }
 
     //on désactive l'UI d'upgrade, pour mettre l'UI de base

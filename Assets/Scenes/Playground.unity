@@ -144,10 +144,6 @@ MonoBehaviour:
   costMoreCards: {fileID: 1161668899}
   costMoreStock: {fileID: 1161668898}
   costHiddenCard: {fileID: 1161668897}
-  cost_inc_inc: 0
-  cost_more_cards: 1
-  cost_more_stocks: 2
-  cost_hidden_card: 3
 --- !u!4 &15638828
 Transform:
   m_ObjectHideFlags: 0
@@ -498,27 +494,27 @@ Prefab:
     - target: {fileID: 224680184044470262, guid: 0c9a33e84d84e9544bc388c5aef0fc0f,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 5.6000004
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 224680184044470262, guid: 0c9a33e84d84e9544bc388c5aef0fc0f,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 25.635153
+      value: 27
       objectReference: {fileID: 0}
     - target: {fileID: 224302398675560236, guid: 0c9a33e84d84e9544bc388c5aef0fc0f,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 7.9
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 224127761707451622, guid: 0c9a33e84d84e9544bc388c5aef0fc0f,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 6.2
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 224878174873636164, guid: 0c9a33e84d84e9544bc388c5aef0fc0f,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 6.8
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 114444442995499634, guid: 0c9a33e84d84e9544bc388c5aef0fc0f,
         type: 2}
@@ -553,17 +549,27 @@ Prefab:
     - target: {fileID: 224878174873636164, guid: 0c9a33e84d84e9544bc388c5aef0fc0f,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 27.7
+      value: 27
       objectReference: {fileID: 0}
     - target: {fileID: 224127761707451622, guid: 0c9a33e84d84e9544bc388c5aef0fc0f,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 27.7
+      value: 27
       objectReference: {fileID: 0}
     - target: {fileID: 224302398675560236, guid: 0c9a33e84d84e9544bc388c5aef0fc0f,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 25
+      value: 27
+      objectReference: {fileID: 0}
+    - target: {fileID: 114536673269219274, guid: 0c9a33e84d84e9544bc388c5aef0fc0f,
+        type: 2}
+      propertyPath: m_Text
+      value: More Stock
+      objectReference: {fileID: 0}
+    - target: {fileID: 114270031039683510, guid: 0c9a33e84d84e9544bc388c5aef0fc0f,
+        type: 2}
+      propertyPath: m_Text
+      value: Income
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0c9a33e84d84e9544bc388c5aef0fc0f, type: 2}

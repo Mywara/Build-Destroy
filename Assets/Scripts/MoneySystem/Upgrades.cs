@@ -9,16 +9,28 @@ public class Upgrades : MonoBehaviour {
     public Text costMoreCards;
     public Text costMoreStock;
     public Text costHiddenCard;
-    public int cost_inc_inc;
-    public int cost_more_cards = (int)1;     //Depends on number of cards in hands
-    public int cost_more_stocks = (int)2;    //Depends on number of stock
-    public int cost_hidden_card = (int)3;    //Depends on number of cards hidden and number of cards in hands
+    private int cost_inc_inc;
+    private int cost_more_cards;     //Depends on number of cards in hands
+    private int cost_more_stocks;    //Depends on number of stock
+    private int cost_hidden_card;    //Depends on number of cards hidden and number of cards in hands
 
-   
+
     public void Awake()
     {
-        cost_inc_inc = (int)MoneySystem.instance.actualIncome * 2 / 3;
+        updateCost();
+        updateCostText();
+    }
 
+    public void updateCost()
+    {
+        cost_inc_inc = (int)MoneySystem.instance.actualIncome * 2 / 3;
+        cost_hidden_card = (int)1;
+        cost_more_cards = (int)1;
+        cost_more_stocks = (int)1;
+    }
+
+    public void updateCostText()
+    {
         costIncInc.text = "Cost : " + cost_inc_inc;
         costMoreCards.text = "Cost : " + cost_more_cards;
         costMoreStock.text = "Cost : " + cost_more_stocks;
@@ -31,30 +43,32 @@ public class Upgrades : MonoBehaviour {
         if (MoneySystem.instance.BuyItem(cost_inc_inc))
         {
             MoneySystem.instance.actualIncome = (int)(MoneySystem.instance.baseIncome * 0.1 + MoneySystem.instance.actualIncome);
+            updateCost();
         }
+       
     }
 
     public void moreCardsInHand()
     {
-        while (true)
+        if (MoneySystem.instance.BuyItem(cost_more_cards))
         {
-            ;
+           
         }
     }
 
     public void moreStock()
     {
-        while (true)
+        if (MoneySystem.instance.BuyItem(cost_more_stocks))
         {
-            ;
+           
         }
     }
 
     public void trapCard()
     {
-        while (true)
+        if (MoneySystem.instance.BuyItem(cost_hidden_card))
         {
-            ;
+           
         }
     }
 
