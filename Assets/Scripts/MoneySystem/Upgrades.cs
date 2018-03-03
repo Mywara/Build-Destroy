@@ -38,6 +38,11 @@ public class Upgrades : MonoBehaviour {
         plusIncome.enabled = false; 
     }
 
+    public void drawFlagOff()
+    {
+        draw_A_Card = false;
+    }
+
     public void updateCost()
     {
         cost_inc_inc = (int)MoneySystem.instance.actualIncome * 2 / 3 * nbUpgrades;
@@ -72,6 +77,7 @@ public class Upgrades : MonoBehaviour {
     {
         if (MoneySystem.instance.BuyItem(cost_more_cards))
         {
+            CardManager.instance.HandExtension();
             updateCost();
         }
     }

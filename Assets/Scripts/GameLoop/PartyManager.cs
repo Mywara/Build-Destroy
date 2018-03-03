@@ -23,6 +23,7 @@ public class PartyManager : Photon.PunBehaviour {
     public Text money;
     public Text moneyUpgrade;
     public Upgrades upgcost;
+    public Button drawButton;
 
     private GameObject playerZone;
     private CameraController camController;
@@ -273,6 +274,7 @@ public class PartyManager : Photon.PunBehaviour {
         waitingToStart = true;
         startPhaseTime = Time.time;
         UpdatePhaseName("Starting in...");
+        drawButton.gameObject.SetActive(false);
     }
 
     [PunRPC]
@@ -293,6 +295,8 @@ public class PartyManager : Photon.PunBehaviour {
             ChangeToBasicUI();
             AddMoney(MoneySystem.instance.actualIncome);
             upgcost.showIncome();
+            upgcost.drawFlagOff();
+            drawButton.gameObject.SetActive(true);
         }
 
         DrawPhase();
@@ -305,6 +309,8 @@ public class PartyManager : Photon.PunBehaviour {
         startPhaseTime = Time.time;
         UpdatePhaseName("Draw Phase");
         drawPhase = true;
+        CardManager.instance.DrawHand(CardManager.instance.handSize);
+        drawButton.enabled = true;
     }
 
     [PunRPC]
@@ -314,6 +320,7 @@ public class PartyManager : Photon.PunBehaviour {
         startPhaseTime = Time.time;
         UpdatePhaseName("Steal Phase");
         stealPhase = true;
+        drawButton.gameObject.SetActive(false);
     }
 
     [PunRPC]
