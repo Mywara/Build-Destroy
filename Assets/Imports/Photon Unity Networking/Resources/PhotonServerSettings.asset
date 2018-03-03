@@ -11,10 +11,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f3758f8f58fdef43803eb9be1df0608, type: 3}
   m_Name: PhotonServerSettings
   m_EditorClassIdentifier: 
-  AppID: 
+  AppID: da2333aa-1554-4e39-9f13-5cb69a39de81
   VoiceAppID: 
   ChatAppID: 
-  HostType: 0
+  HostType: 4
   PreferredRegion: 0
   EnabledRegions: -1
   Protocol: 0
@@ -26,5 +26,29 @@ MonoBehaviour:
   PunLogging: 0
   NetworkLogging: 1
   RunInBackground: 1
-  RpcList: []
+  RpcList:
+  - AddMoney
+  - AddPlayerName
+  - BuildPhase
+  - ChangeToBasicUI
+  - ChangeToUpgradeUI
+  - Chat
+  - DestroyRpc
+  - DestructionPhase
+  - DrawPhase
+  - InstantiateRpc
+  - NewPlayerRdy
+  - PickupItemInit
+  - PunPickup
+  - PunPickupSimple
+  - PunRespawn
+  - RequestForPickupItems
+  - RequestForPickupTimes
+  - ResetPhase
+  - StartingGame
+  - StealPhase
+  - Turn
+  - UpdateTimer
+  - UpdateTimerUpgrade
+  - UpgradePhase
   DisableAutoOpenWizard: 1
