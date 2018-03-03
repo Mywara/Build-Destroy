@@ -12,7 +12,7 @@ public class MoneySystem : MonoBehaviour {
     public int actualIncome;
 
 
-    private static MoneySystem instance
+    public static MoneySystem instance
     {
         get
         {
@@ -59,6 +59,7 @@ public class MoneySystem : MonoBehaviour {
         AddMoney(PlayerPrefs.GetInt("MoneySave", 0));
 
         //Update Money
+        actualIncome = baseIncome;
         SaveMoney();
     }
 
