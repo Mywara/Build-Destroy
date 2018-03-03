@@ -47,11 +47,11 @@ public class CardManager : MonoBehaviour
 
     // Variables declarations
     public List<Card> cardList; // List of possible cards
-    private List<GameObject> cardInHand; // List of the UI objects in the player's hand
+    public List<GameObject> cardInHand; // List of the UI objects in the player's hand
     public GameObject cardSlotPrefab; // Prefab to the card slot, needed to add a card to an existing hand
     public GridLayoutGroup grid; // The gridLayoutGroup is the scalable hand of the player
 
-    private void Start()
+    private void Awake()
     {
         DrawHand();
     }
@@ -73,11 +73,8 @@ public class CardManager : MonoBehaviour
             CardDisplay _cd = obj.GetComponent<CardDisplay>();
 
             // Randomly select a card from the possible card list
-            UnityEngine.Random.InitState(Time.frameCount);
-            var ranNum = UnityEngine.Random.Range(0, cardList.Count);
-            Card selectedCard = cardList[ranNum];
-            _cd.card = selectedCard;
-            _cd.SetCard();
+            Card selectedCard = SelectCard();
+            _cd.SetCard(selectedCard);
         }
     }
 
@@ -90,11 +87,8 @@ public class CardManager : MonoBehaviour
         CardDisplay _cd = obj.GetComponent<CardDisplay>();
 
         // Randomly select a card from the possible card list
-        UnityEngine.Random.InitState(Time.frameCount);
-        var ranNum = UnityEngine.Random.Range(0, cardList.Count);
-        Card selectedCard = cardList[ranNum];
-        _cd.card = selectedCard;
-        _cd.SetCard();
+        Card selectedCard = SelectCard();
+        _cd.SetCard(selectedCard);
     }
 
     /// <summary>
@@ -108,5 +102,16 @@ public class CardManager : MonoBehaviour
         item.transform.localPosition = Vector3.zero;
 
         CardManager._instance.DrawCard(item);
+    }
+
+    /// <summary>
+    /// Method used to randomly select a card to be added to the player's hand
+    /// </summary>
+    public Card SelectCard()
+    {
+        UnityEngine.Random.InitState(UnityEngine.Random.Range(0, 4096));
+        var ranNum = UnityEngine.Random.Range(0, cardList.Count);
+        Card selectedCard = cardList[ranNum];
+        return selectedCard;
     }
 }
