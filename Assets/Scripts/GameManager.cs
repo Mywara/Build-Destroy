@@ -6,47 +6,32 @@ using UnityEngine;
 public class GameManager : Photon.PunBehaviour
 {
     public static GameManager instance;
-    public string levelToLoad = "Playground";
 
     void Awake()
     {
-        if (instance != null)
-        {
-            DestroyImmediate(gameObject);
-            return;
-        }
-        DontDestroyOnLoad(gameObject);
-        instance = this;
+            if (instance != null)
+            {
+                DestroyImmediate(gameObject);
+                return;
+            }
+            DontDestroyOnLoad(gameObject);
+            instance = this;
+            PhotonNetwork.automaticallySyncScene = true;
     }
 
-    void Start()
+   void Start()
+   {
+        PhotonNetwork.ConnectUsingSettings("Version_1.1");
+   }
+
+    public void Quit()
     {
-        PhotonNetwork.ConnectUsingSettings("Version_1.0");
+        Application.Quit();
     }
 
-    public void JoinGame()
+    public void ChooseRoom()
     {
-        RoomOptions ro = new RoomOptions();
-        ro.MaxPlayers = 6;
-        PhotonNetwork.JoinOrCreateRoom("Default Room", ro, null);
-    }
-
-
-    public override void OnJoinedRoom()
-    {
-        if (PhotonNetwork.isMasterClient)
-        {
-            PhotonNetwork.LoadLevel(levelToLoad);
-        }
-    }
-
-    void OnLevelWasLoaded(int levelNumber)
-    {
-        if (!PhotonNetwork.inRoom) return;
-        if(levelToLoad.Equals("Playground") && PhotonNetwork.isMasterClient)
-        {
-            //ArenaManager.instance.photonView.RPC("CreateArena", PhotonTargets.AllBufferedViaServer, nbPlayers);
-        }
+        PhotonNetwork.LoadLevel("ChooseRoom");
     }
 }
 
