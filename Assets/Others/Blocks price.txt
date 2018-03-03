@@ -1,0 +1,10 @@
+cube == 5000
+torus == 1000
+wall == 15 000
+recPillar == 10 000
+roundPillar == 7000
+straithStairs == 4000
+curved stairs == 8000
+floor == 10 000
+poutre == 8000
+door == 3000
