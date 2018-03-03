@@ -19,6 +19,7 @@ public class CardDisplay : MonoBehaviour
     /// <summary>
     /// Sets the cost text and the image to the correct values
     /// </summary>
+    /// <param name="card">The parameters is the card you want to use for this CardDisplay</param>
     public void SetCard(Card card)
     {
         this.card = card;
