@@ -11,11 +11,11 @@ public class CubeGen : MonoBehaviour {
 
 
         
-       // RandomGen sideScaler = new RandomGen(MIN_SIDE, MAX_SIDE);
-       // int side = sideScaler.GetNbr();
+        RandomGen sideScaler = new RandomGen(MIN_SIDE, MAX_SIDE);
+        int side = sideScaler.GetNbr();
 
         GameObject go = Instantiate(cube,new Vector3(-1000000,0,0), Quaternion.identity);
-       // go.transform.localScale += new Vector3(side, side, side);
+        go.transform.localScale += new Vector3(side, side, side);
 
 	}
 	
