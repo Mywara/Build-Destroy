@@ -50,4 +50,5 @@ MonoBehaviour:
   - UpdateTimer
   - UpdateTimerUpgrade
   - AddMoney
+  - StartingGame
   DisableAutoOpenWizard: 1

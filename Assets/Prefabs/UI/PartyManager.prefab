@@ -888,6 +888,7 @@ MonoBehaviour:
   buildPhaseTime: 5
   destructionPhaseTime: 5
   upgradePhaseTime: 5
+  waittingToStartTime: 5
   phaseName: {fileID: 114131675534987442}
   readyForNewPhase: {fileID: 114007613292717190}
   readyForNewPhaseUpgrade: {fileID: 114623260726084302}
@@ -2900,7 +2901,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: -10}
-  m_SizeDelta: {x: 160, y: 30}
+  m_SizeDelta: {x: 300, y: 30}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!224 &224951600511673496
 RectTransform:

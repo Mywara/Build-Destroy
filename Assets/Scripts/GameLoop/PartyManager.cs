@@ -10,6 +10,7 @@ public class PartyManager : Photon.PunBehaviour {
     public float buildPhaseTime = 5f;
     public float destructionPhaseTime = 5f;
     public float upgradePhaseTime = 5f;
+    public float waittingToStartTime = 5f;
     public Text phaseName;
     public Button readyForNewPhase;
     public Button readyForNewPhaseUpgrade;
@@ -34,6 +35,8 @@ public class PartyManager : Photon.PunBehaviour {
     private bool destructionPhase = false;
     private bool upgradePhase = false;
     private bool iAmReady = false;
+    private bool gameStarted = false;
+    private bool waitingToStart = false;
 
     private void Awake()
     {
@@ -55,6 +58,8 @@ public class PartyManager : Photon.PunBehaviour {
         UpdateReadyButtonTextUpgrade();
         upgradeUI.enabled = false;
         UpdateMoney();
+        UpdatePhaseName("Waiting for other players...");
+        timer.text = "";
     }
 
     // Use this for initialization
@@ -76,7 +81,7 @@ public class PartyManager : Photon.PunBehaviour {
         {
             return;
         }
-        Turn();
+        //Turn();
     }
 	
 	// Update is called once per frame
@@ -84,6 +89,47 @@ public class PartyManager : Photon.PunBehaviour {
         if(!PhotonNetwork.isMasterClient && PhotonNetwork.connected)
         {
             return;
+        }
+        if(!gameStarted)
+        {  
+            if (PhotonNetwork.connected)
+            {
+                if (PhotonNetwork.room.PlayerCount == nbMaxPlayer)
+                {
+                    photonView.RPC("StartingGame", PhotonTargets.AllViaServer);
+                }
+            }
+            else
+            {
+                StartingGame();
+            }
+        }
+
+        if(waitingToStart)
+        {
+            if (PhotonNetwork.connected)
+            {
+                photonView.RPC("UpdateTimer", PhotonTargets.AllViaServer, startPhaseTime + waittingToStartTime - Time.time);
+            }
+            else
+            {
+                UpdateTimer(startPhaseTime + waittingToStartTime - Time.time);
+            }
+
+            if (Time.time > startPhaseTime + waittingToStartTime || nbPlayerReady == nbMaxPlayer)
+            {
+                waitingToStart = false;
+                if (PhotonNetwork.connected)
+                {
+                    photonView.RPC("ResetPhase", PhotonTargets.AllViaServer);
+                    photonView.RPC("Turn", PhotonTargets.AllViaServer);
+                }
+                else
+                {
+                    ResetPhase();
+                    Turn();
+                }
+            }
         }
 		if(drawPhase)
         {
@@ -218,6 +264,16 @@ public class PartyManager : Photon.PunBehaviour {
             }
         }
     }
+
+    [PunRPC]
+    private void StartingGame()
+    {
+        gameStarted = true;
+        waitingToStart = true;
+        startPhaseTime = Time.time;
+        UpdatePhaseName("Starting in...");
+    }
+
     [PunRPC]
     private void Turn()
     {
@@ -225,15 +281,15 @@ public class PartyManager : Photon.PunBehaviour {
         if(PhotonNetwork.connected)
         {
             photonView.RPC("ChangeToBasicUI", PhotonTargets.AllViaServer);
-            photonView.RPC("AddMoney", PhotonTargets.AllViaServer, MoneySystem.instance.actualIncome);
+            if(PhotonNetwork.isMasterClient)
+            {
+                photonView.RPC("AddMoney", PhotonTargets.AllViaServer, MoneySystem.instance.actualIncome);
+            }
         }
         else
         {
             ChangeToBasicUI();
-            if(PhotonNetwork.isMasterClient)
-            {
-                AddMoney(MoneySystem.instance.actualIncome);
-            }
+            AddMoney(MoneySystem.instance.actualIncome);
         }
 
         DrawPhase();
