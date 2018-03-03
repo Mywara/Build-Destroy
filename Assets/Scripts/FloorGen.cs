@@ -4,10 +4,6 @@ using UnityEngine;
 
 public class FloorGen : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
     private const int MIN_WINTH = 1;
     private const int MAX_WINTH = 10;
     public GameObject floor;
