@@ -64,9 +64,9 @@ public class CameraController : MonoBehaviour {
             Vector3 negDistance = new Vector3(0, 0, -distance);
             Vector3 position = rotation * negDistance + targetToRotateAround.position;
             //la camera ne peut pas descendre en dessous de y = 0
-            if (position.y < 0)
+            if (position.y < 5)
             {
-                position.y = 0;
+                position.y = 5;
             }
             //applique la nouvelle pos / rot de la cam
             transform.rotation = rotation;

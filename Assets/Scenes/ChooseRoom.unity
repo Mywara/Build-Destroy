@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -446,7 +446,7 @@ Prefab:
     - target: {fileID: 114009379742186368, guid: 021c4123b0a0f50469a381c0d6dbd4a1,
         type: 2}
       propertyPath: LevelToLoad
-      value: TestCamera
+      value: Playground
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 021c4123b0a0f50469a381c0d6dbd4a1, type: 2}

@@ -12,7 +12,6 @@ public class RoomManager : Photon.PunBehaviour {
     public Text numberText;
     public Text joinRoomText;
     public string LevelToLoad = "SceneTest";
-    public int nbPlayers = 6;
 
     public void Start()
     {
@@ -62,15 +61,4 @@ public class RoomManager : Photon.PunBehaviour {
             roomActvies.text = roomActvies.text + "\n Room name : " + game.Name + "  Player :  " + game.PlayerCount + "/" + game.MaxPlayers;
         }
     }
-
-    void OnLevelWasLoaded(int levelNumber)
-    {
-        if (!PhotonNetwork.inRoom) return;
-        if (LevelToLoad.Equals("Playground") && PhotonNetwork.isMasterClient)
-        {
-            ArenaManager.instance.photonView.RPC("CreateArena", PhotonTargets.AllBufferedViaServer, nbPlayers);
-        }
-    }
-
-
 }
