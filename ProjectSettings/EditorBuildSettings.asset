@@ -8,3 +8,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/StartScene.unity
     guid: ebce653abffebf24ea7c6c34e022934c
+  - enabled: 1
+    path: Assets/Scenes/ChooseRoom.unity
+    guid: 0ed04c4f74a77544488c16b9635f2aed
+  - enabled: 1
+    path: Assets/Scenes/SceneTest.unity
+    guid: 622b65585eb4c7145b36813c36a3e6d5

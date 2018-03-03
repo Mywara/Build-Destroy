@@ -16,27 +16,24 @@ using UnityEngine;
             }
             DontDestroyOnLoad(gameObject);
             instance = this;
-        }
+        PhotonNetwork.automaticallySyncScene = true;
+    }
 
         void Start()
         {
-        PhotonNetwork.ConnectUsingSettings("Version_1.0");
+        PhotonNetwork.ConnectUsingSettings("Version_1.1");
         }
 
-    public void JoinGame()
+
+    public void Quit()
     {
-        RoomOptions ro = new RoomOptions();
-        ro.MaxPlayers = 6;
-        PhotonNetwork.JoinOrCreateRoom("Default Room", ro, null);
+        Application.Quit();
     }
 
-
-    public override void OnJoinedRoom()
+    public void ChooseRoom()
     {
-        if (PhotonNetwork.isMasterClient)
-        {
-            PhotonNetwork.LoadLevel("SceneTest");
-        }
+       
+        PhotonNetwork.LoadLevel("ChooseRoom");
     }
 
 }
