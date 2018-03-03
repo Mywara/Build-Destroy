@@ -3,39 +3,44 @@ using UnityEngine.UI;
 
 public class CardDisplay : MonoBehaviour
 {
-
     // Variable declarations
     public Card card;
-    public GameObject cardObject;
+    public GameObject blockPrefab;
     public Text costText;
-    public Image image;
     public Button b;
-
-    public GameObject cardSlotPrefab;
-    public GridLayoutGroup grid;
+    public Vector3 mousePos;
 
     // Use this for initialization
     private void Start()
     {
         SetCard();
         b.GetComponentInChildren<Button>();
-        cardObject = card.blockPrefab;
+        blockPrefab = card.blockPrefab;
     }
 
+    /// <summary>
+    /// Sets the cost text and the image to the correct values
+    /// </summary>
     public void SetCard()
     {
         costText.text = card.cost;
         b.image.sprite = card.image;
     }
 
-    public void AddCard()
+    /// <summary>
+    /// Method to be called when the card button is clicked
+    /// It will instantiate the block prefab in the game world at the mouse position
+    /// </summary>
+    public void CardClicked()
     {
-        GameObject item = Instantiate(cardSlotPrefab, Vector3.zero, Quaternion.identity);
-        item.transform.SetParent(grid.transform, false);
-        item.transform.localScale = new Vector3(1, 1, 1);
-        item.transform.localPosition = Vector3.zero;
+        //obtenir la souris
+        //GameObject prefab = cardPrefab.getComponent<CardDisplay>().cardObject;
+        //GameObject item = Instantiate(prefab, Vector3.zero, Quaternion.identity);
+        //mettre la souris en enfant
+        //Destroy(cardPrefab);
 
-        CardManager._instance.DrawCard(item);
+        mousePos = Input.mousePosition;
+        GameObject item = Instantiate(blockPrefab, Vector3.zero, Quaternion.identity);
+        item.transform.position = mousePos;
     }
-
 }
