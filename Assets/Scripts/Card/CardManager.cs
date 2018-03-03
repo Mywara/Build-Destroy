@@ -52,10 +52,6 @@ public class CardManager : MonoBehaviour
     public GridLayoutGroup grid; // The gridLayoutGroup is the scalable hand of the player
     public int handSize = 5;
 
-    private void Awake()
-    {
-        DrawHand(handSize);
-    }
 
     /// <summary>
     /// Method to be called when you need to draw a hand of card
@@ -63,6 +59,7 @@ public class CardManager : MonoBehaviour
     /// <param name="hand">Should be the handSize variable</param>
     public void DrawHand(int hand)
     {
+        hand = this.handSize;
         // Finds all of the card slots in the player's UI
         foreach (var obj in GameObject.FindObjectsOfType<GameObject>().Where(o => o.tag == "Cards"))
         {
@@ -71,12 +68,16 @@ public class CardManager : MonoBehaviour
 
         if (cardInHand.Count < hand)
         {
-            GameObject item = Instantiate(cardSlotPrefab, Vector3.zero, Quaternion.identity);
-            item.transform.SetParent(grid.transform, false);
-            item.transform.localScale = new Vector3(1, 1, 1);
-            item.transform.localPosition = Vector3.zero;
+            while (cardInHand.Count < hand)
+            {
 
-            cardInHand.Add(item);
+                GameObject item = Instantiate(cardSlotPrefab, Vector3.zero, Quaternion.identity);
+                item.transform.SetParent(grid.transform, false);
+                item.transform.localScale = new Vector3(1, 1, 1);
+                item.transform.localPosition = Vector3.zero;
+
+                cardInHand.Add(item);
+            }
         }
         // Removes the extra cards if the player has too many in their hands following a temporary upgrade
         else if (cardInHand.Count > hand)

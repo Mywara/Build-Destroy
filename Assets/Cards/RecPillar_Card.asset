@@ -13,6 +13,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Rectangular Pillar
   cost: 1000
-  image: {fileID: 21300000, guid: d6276b9685413ac45a07bfe6d13b6d13, type: 3}
-  blockPrefab: {fileID: 1631859275818476, guid: d9f23bcf14f5ce2438587cb23494a032,
+  image: {fileID: 21300000, guid: 716403bcb96a30542a2ab8f064b26fda, type: 3}
+  blockPrefab: {fileID: 1631859275818476, guid: 4d8ef48869def6242a068224d0f7629d,
     type: 2}

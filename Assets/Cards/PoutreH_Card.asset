@@ -13,6 +13,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Poutre Horizontal
   cost: 1000
-  image: {fileID: 21300000, guid: c2fb95e5947099048ad31fb62a686e3d, type: 3}
+  image: {fileID: 21300000, guid: bfd3763a5da8d624cb5ca670a25f27df, type: 3}
   blockPrefab: {fileID: 1424008434287136, guid: f6c94898c00176040937523b40601829,
     type: 2}

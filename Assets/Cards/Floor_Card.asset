@@ -13,6 +13,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Floor
   cost: 1000
-  image: {fileID: 21300000, guid: b8dd22e13fc053547bfcc1c0ddb3a3a0, type: 3}
+  image: {fileID: 21300000, guid: cd83de2c6c395fb41b9f24f70908ae68, type: 3}
   blockPrefab: {fileID: 1782496559727774, guid: b08543d7ab19dac4d84bc875f0403c28,
     type: 2}

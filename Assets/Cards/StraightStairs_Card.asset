@@ -13,6 +13,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Straight Stairs
   cost: 1000
-  image: {fileID: 21300000, guid: cfbded887f9a7bc48824aa216340491d, type: 3}
-  blockPrefab: {fileID: 1001438358618444, guid: 823c994f8a78b71468cdda4b20fd9957,
+  image: {fileID: 21300000, guid: 9182150c0546b3b46a6526ccc3986e55, type: 3}
+  blockPrefab: {fileID: 1001438358618444, guid: 088ca14fea6dd1349816838e41f6a792,
     type: 2}

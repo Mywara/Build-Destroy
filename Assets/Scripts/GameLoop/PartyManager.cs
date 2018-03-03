@@ -275,6 +275,7 @@ public class PartyManager : Photon.PunBehaviour {
         startPhaseTime = Time.time;
         UpdatePhaseName("Starting in...");
         drawButton.gameObject.SetActive(false);
+
     }
 
     [PunRPC]
@@ -295,7 +296,6 @@ public class PartyManager : Photon.PunBehaviour {
             ChangeToBasicUI();
             AddMoney(MoneySystem.instance.actualIncome);
             upgcost.showIncome();
-            upgcost.drawFlagOff();
             drawButton.gameObject.SetActive(true);
         }
 
@@ -527,6 +527,7 @@ public class PartyManager : Photon.PunBehaviour {
     //Met à jour le UI Text avec l'argent du joueur
     public void UpdateMoney()
     {
+        Debug.Log("Yep");
         money.text = "Money : " + MoneySystem.GetMoney() + " $";
     }
 

@@ -13,6 +13,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Wall
   cost: 1000
-  image: {fileID: 21300000, guid: e79debcf25465fb43a5102c25d13d525, type: 3}
+  image: {fileID: 21300000, guid: 4f6f6cd428d726c428c5d58e455b267c, type: 3}
   blockPrefab: {fileID: 1700972843585496, guid: b01e84477840dc1458e627b59d7a4d4d,
     type: 2}

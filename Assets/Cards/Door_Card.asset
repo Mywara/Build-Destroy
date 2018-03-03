@@ -13,6 +13,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Door
   cost: 1000
-  image: {fileID: 21300000, guid: 9cbc9b1a6be5bdf4dacc44dcbac1b464, type: 3}
-  blockPrefab: {fileID: 1015485233289602, guid: bdce144a063d3d64f8c5c775f6809cc6,
+  image: {fileID: 21300000, guid: 2025463897c00014b86ac57aa9a6dece, type: 3}
+  blockPrefab: {fileID: 1015485233289602, guid: a1eaa7dce733de144b78e531426614f3,
     type: 2}

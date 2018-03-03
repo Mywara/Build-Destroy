@@ -13,6 +13,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Curved Stairs
   cost: 1000
-  image: {fileID: 21300000, guid: 11f016b5ad9561f4ca864656a65100ac, type: 3}
-  blockPrefab: {fileID: 1873872676734810, guid: d4585e621f83be74a91de35dce05b373,
+  image: {fileID: 21300000, guid: bd5597305a2b3314192308a2eded4e15, type: 3}
+  blockPrefab: {fileID: 1873872676734810, guid: d9dbebeeb1408d844835b7d078df4993,
     type: 2}

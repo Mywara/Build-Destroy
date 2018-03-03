@@ -13,6 +13,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Round Pillar
   cost: 1000
-  image: {fileID: 21300000, guid: ed9d2a1180bbb2f4c8a637c91fac22d7, type: 3}
+  image: {fileID: 21300000, guid: 10f769952bae42c498a772f8753bd7e8, type: 3}
   blockPrefab: {fileID: 1059371325278682, guid: b33c127d1c1c0244ba1c46a9ee21d1ee,
     type: 2}
