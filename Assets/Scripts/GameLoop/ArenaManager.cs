@@ -6,7 +6,7 @@ public class ArenaManager : Photon.PunBehaviour {
 
     static public ArenaManager instance;
     public int distanceBetweenPlayers = 40;
-    public int nbPlayers;
+    public int nbPlayers = 6;
 
     public List<GameObject> playerZonesList;
 
@@ -25,7 +25,6 @@ public class ArenaManager : Photon.PunBehaviour {
             return;
         }
 
-        nbPlayers = PhotonNetwork.room.MaxPlayers;
         CreateArena();
     }
 

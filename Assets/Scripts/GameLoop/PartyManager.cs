@@ -21,7 +21,6 @@ public class PartyManager : Photon.PunBehaviour {
     public Text timerUpgrade;
 
     private GameObject playerZone;
-    private CameraController camController;
     private int PlayerID = 1;
     private int nbMaxPlayer;
     private int nbPlayerReady;
@@ -59,13 +58,6 @@ public class PartyManager : Photon.PunBehaviour {
         if(arenaManager != null)
         {
             playerZone = arenaManager.GetPlayerZone(PlayerID);
-            camController = Camera.main.GetComponent<CameraController>();
-            Transform focusPoint = playerZone.transform.GetChild(1);
-            camController.SetTarget(focusPoint);
-                         
-            // Test récupération de la zone de jeu du joueur
-            Vector3 offset = new Vector3(0f, 7f, 0f);
-            PhotonNetwork.Instantiate("TestCube", playerZone.transform.position + offset, Quaternion.identity, 0);
         }
 
         //si on est pas le masterclient, on ne fait rien
