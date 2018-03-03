@@ -9,7 +9,7 @@ public class CardManager : MonoBehaviour
     #region Singleton
     public static CardManager _instance;
 
-    private static CardManager instance
+    public static CardManager instance
     {
         get
         {
