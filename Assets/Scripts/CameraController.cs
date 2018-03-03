@@ -10,9 +10,9 @@ public class CameraController : MonoBehaviour {
     public float upAndDownSpeed = 10.0f;
     public float angleMaxVertical = 90.0f;
     public float angleminVertical = -30.0f;
-    public float minDistance = 5;
-    public float maxDistance = 30;
-    public float startDistance = 10;
+    public float minDistance = 10;
+    public float maxDistance = 50;
+    public float startDistance = 20;
     private float rotY;
     private float rotX;
     private float moveUp;
@@ -60,13 +60,18 @@ public class CameraController : MonoBehaviour {
         if(targetToRotateAround != null)
         {
             //fait bouger la cible de haut en bas
-            targetToRotateAround.Translate(new Vector3(0, moveUp, 0));
+            Vector3 upAndDownMovement = new Vector3(0f, moveUp, 0f);
+            Vector3 upAndDownTranslation = upAndDownMovement + targetToRotateAround.position;
+            if (upAndDownTranslation.y >= 0f)
+            {
+                targetToRotateAround.Translate(upAndDownMovement);
+            }
             Vector3 negDistance = new Vector3(0, 0, -distance);
             Vector3 position = rotation * negDistance + targetToRotateAround.position;
-            //la camera ne peut pas descendre en dessous de y = 0
-            if (position.y < 0)
+            //la camera ne peut pas descendre en dessous de y = 5
+            if (position.y < 5)
             {
-                position.y = 0;
+                position.y = 5;
             }
             //applique la nouvelle pos / rot de la cam
             transform.rotation = rotation;
