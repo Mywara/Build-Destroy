@@ -6,6 +6,7 @@ using UnityEngine;
 public class GameManager : Photon.PunBehaviour
 {
     public static GameManager instance;
+
     void Awake()
     {
             if (instance != null)
@@ -30,12 +31,7 @@ public class GameManager : Photon.PunBehaviour
 
     public void ChooseRoom()
     {
-
-       
         PhotonNetwork.LoadLevel("ChooseRoom");
-
     }
-
-
 }
 
