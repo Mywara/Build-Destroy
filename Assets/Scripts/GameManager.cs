@@ -5,10 +5,9 @@ using UnityEngine;
 
 public class GameManager : Photon.PunBehaviour
 {
-
-        void Awake()
-        {
-       
+    public static GameManager instance;
+    void Awake()
+    {
             if (instance != null)
             {
                 DestroyImmediate(gameObject);
@@ -16,25 +15,13 @@ public class GameManager : Photon.PunBehaviour
             }
             DontDestroyOnLoad(gameObject);
             instance = this;
-        PhotonNetwork.automaticallySyncScene = true;
+            PhotonNetwork.automaticallySyncScene = true;
     }
 
-        void Start()
-        {
+   void Start()
+   {
         PhotonNetwork.ConnectUsingSettings("Version_1.1");
-        }
-            DestroyImmediate(gameObject);
-            return;
-        }
-        DontDestroyOnLoad(gameObject);
-        instance = this;
-    }
-
-    void Start()
-    {
-        PhotonNetwork.ConnectUsingSettings("Version_1.0");
-    }
-
+   }
 
     public void Quit()
     {
@@ -43,17 +30,12 @@ public class GameManager : Photon.PunBehaviour
 
     public void ChooseRoom()
     {
+
        
         PhotonNetwork.LoadLevel("ChooseRoom");
+
     }
 
-    void OnLevelWasLoaded(int levelNumber)
-    {
-        if (!PhotonNetwork.inRoom) return;
-        if(levelToLoad.Equals("Playground") && PhotonNetwork.isMasterClient)
-        {
-            ArenaManager.instance.photonView.RPC("CreateArena", PhotonTargets.AllBufferedViaServer, nbPlayers);
-        }
-    }
+
 }
 
