@@ -30,7 +30,7 @@ public class ArenaManager : Photon.PunBehaviour {
         Debug.Log("Nb players : " + nbPlayers);
         CreateArena();
 
-        photonView.RPC("AddPlayerName", PhotonTargets.AllBufferedViaServer, PlayerPrefs.GetString("PlayerName"));
+        photonView.RPC("AddPlayerName", PhotonTargets.AllBufferedViaServer, PlayerPrefs.GetString("PlayerName"), PhotonNetwork.player.ID);
     }
 
 	// Use this for initialization
@@ -44,8 +44,9 @@ public class ArenaManager : Photon.PunBehaviour {
 	}
 
     [PunRPC]
-    public void AddPlayerName(string playerName) {
+    public void AddPlayerName(string playerName, int playerId) {
         playerNamesList.Add(playerName);
+        SwitchViewBetweenPlayers.instance.AddAButton(playerName,  playerId);
     }
 
     public void CreateArena() {

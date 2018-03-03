@@ -17,7 +17,10 @@ public class PlayerNameManager : MonoBehaviour {
             if (PlayerPrefs.HasKey(playerNamePrefKey))
             {
                 defaultName = PlayerPrefs.GetString(playerNamePrefKey);
-                _inputField.text = defaultName;
+                if (!defaultName.Equals(""))
+                {
+                    _inputField.GetComponentInChildren<Text>().text = "Name : " + defaultName;
+                }
             }
         }
 
