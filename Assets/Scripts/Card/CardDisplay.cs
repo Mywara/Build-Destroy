@@ -10,12 +10,6 @@ public class CardDisplay : MonoBehaviour
     public Button b;
     public Vector3 mousePos;
 
-    // Use this for initialization
-    private void Start()
-    {
-
-    }
-
     /// <summary>
     /// Sets the cost text and the image to the correct values
     /// </summary>
