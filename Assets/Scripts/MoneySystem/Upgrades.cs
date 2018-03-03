@@ -13,6 +13,7 @@ public class Upgrades : MonoBehaviour {
     private int cost_more_cards;     //Depends on number of cards in hands
     private int cost_more_stocks;    //Depends on number of stock
     private int cost_hidden_card;    //Depends on number of cards hidden and number of cards in hands
+    private int nbUpgrades = 1;
 
 
     public void Awake()
@@ -23,10 +24,11 @@ public class Upgrades : MonoBehaviour {
 
     public void updateCost()
     {
-        cost_inc_inc = (int)MoneySystem.instance.actualIncome * 2 / 3;
-        cost_hidden_card = (int)1;
-        cost_more_cards = (int)1;
-        cost_more_stocks = (int)1;
+        cost_inc_inc = (int)MoneySystem.instance.actualIncome * 2 / 3 * nbUpgrades;
+        cost_hidden_card = (int)MoneySystem.instance.actualIncome * 2 / 3 * nbUpgrades;
+        cost_more_cards = (int)MoneySystem.instance.actualIncome * 2 / 3 * nbUpgrades;
+        cost_more_stocks = (int)MoneySystem.instance.actualIncome * 2 / 3 * nbUpgrades;
+        nbUpgrades++;
     }
 
     public void updateCostText()
@@ -52,7 +54,7 @@ public class Upgrades : MonoBehaviour {
     {
         if (MoneySystem.instance.BuyItem(cost_more_cards))
         {
-           
+            updateCost();
         }
     }
 
@@ -60,7 +62,7 @@ public class Upgrades : MonoBehaviour {
     {
         if (MoneySystem.instance.BuyItem(cost_more_stocks))
         {
-           
+            updateCost();
         }
     }
 
@@ -68,7 +70,7 @@ public class Upgrades : MonoBehaviour {
     {
         if (MoneySystem.instance.BuyItem(cost_hidden_card))
         {
-           
+            updateCost();
         }
     }
 
@@ -82,10 +84,7 @@ public class Upgrades : MonoBehaviour {
 
     public void destroyEverythingAndDie()
     {
-        while (true)
-        {
-            ;
-        }
+        
     }
 
 }

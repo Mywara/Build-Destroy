@@ -5,12 +5,12 @@ using UnityEngine.UI;
 
 public class PartyManager : Photon.PunBehaviour {
 
-    public float drawPhaseTime = 5f;
-    public float stealPhaseTime = 5f;
-    public float buildPhaseTime = 5f;
-    public float destructionPhaseTime = 5f;
-    public float upgradePhaseTime = 5f;
-    public float waittingToStartTime = 5f;
+    public float drawPhaseTime = 10f;
+    public float stealPhaseTime = 30f;
+    public float buildPhaseTime = 120f;
+    public float destructionPhaseTime = 120f;
+    public float upgradePhaseTime = 30f;
+    public float waittingToStartTime = 10f;
     public Text phaseName;
     public Button readyForNewPhase;
     public Button readyForNewPhaseUpgrade;
