@@ -513,7 +513,7 @@ public class PartyManager : Photon.PunBehaviour {
     //Met à jour le UI Text avec l'argent du joueur
     private void UpdateMoney()
     {
-        money.text = MoneySystem.GetMoney() + " $";
+        money.text = "Money : " + MoneySystem.GetMoney() + " $";
     }
 
     //Met à jour le UI Text du menu d'upgrade avec l'argent du joueur
