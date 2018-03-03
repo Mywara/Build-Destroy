@@ -7,7 +7,6 @@ public class GameManager : Photon.PunBehaviour
 {
     public static GameManager instance;
     public string levelToLoad = "Playground";
-    public int nbPlayers = 6;
 
     void Awake()
     {
@@ -46,7 +45,7 @@ public class GameManager : Photon.PunBehaviour
         if (!PhotonNetwork.inRoom) return;
         if(levelToLoad.Equals("Playground") && PhotonNetwork.isMasterClient)
         {
-            ArenaManager.instance.photonView.RPC("CreateArena", PhotonTargets.AllBufferedViaServer, nbPlayers);
+            //ArenaManager.instance.photonView.RPC("CreateArena", PhotonTargets.AllBufferedViaServer, nbPlayers);
         }
     }
 }

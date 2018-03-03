@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class ArenaManager : Photon.PunBehaviour {
 
-    private List<GameObject> playersList = new List<GameObject>();
-    private List<GameObject> playerZonesList = new List<GameObject>();
-
     static public ArenaManager instance;
     public int distanceBetweenPlayers = 40;
+    public int nbPlayers = 6;
+
+    public List<GameObject> playerZonesList;
 
     void Awake() {
         if(instance != null && instance != this)
@@ -18,11 +18,19 @@ public class ArenaManager : Photon.PunBehaviour {
             return;
         }
         instance = this;
+
+        if (!PhotonNetwork.connected)
+        {
+            Debug.Log("Not connected to Photon!");
+            return;
+        }
+
+        CreateArena();
     }
 
 	// Use this for initialization
-	void Start () {
-		
+    void Start () {
+        
 	}
 	
 	// Update is called once per frame
@@ -30,8 +38,8 @@ public class ArenaManager : Photon.PunBehaviour {
 		
 	}
 
-    [PunRPC]
-    public void CreateArena(int nbPlayers) {
+    //[PunRPC]
+    public void CreateArena() {
 
         // calcul de l'angle séparant deux joueurs
         float angleBetweenPlayers = 2 * Mathf.PI / nbPlayers;
@@ -55,6 +63,21 @@ public class ArenaManager : Photon.PunBehaviour {
 
             // la zone de jeu créée est définie comme fille du GameObject Arena auquel est rattaché ce script
             newPlayerZone.transform.parent = gameObject.transform;
+
+            // ajout de la zone de jeu créée à la liste du manager
+            playerZonesList.Add(newPlayerZone);
+        }
+    }
+
+    public GameObject GetPlayerZone(int id) {
+        
+        if(id <= PhotonNetwork.room.MaxPlayers && id > 0)
+        {
+            return playerZonesList[id - 1];
+        }
+        else
+        {
+            return null;
         }
     }
 }

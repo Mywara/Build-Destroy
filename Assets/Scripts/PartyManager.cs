@@ -11,7 +11,10 @@ public class PartyManager : Photon.PunBehaviour {
     public float destructionPhaseTime = 5f;
     public float upgradePhaseTime = 5f;
     public Text phaseName;
+    public ArenaManager arenaManager;
 
+    private GameObject playerZone;
+    private int PlayerID = 1;
     private int nbMaxPlayer;
     private int nbPlayerReady;
     private float startPhaseTime;
@@ -27,15 +30,20 @@ public class PartyManager : Photon.PunBehaviour {
         if(PhotonNetwork.connected)
         {
             nbMaxPlayer = PhotonNetwork.room.MaxPlayers;
+            PlayerID = PhotonNetwork.player.ID;
         }
         else
         {
             nbMaxPlayer = 1;
         }
+
         nbPlayerReady = 0;
     }
+
     // Use this for initialization
     void Start () {
+        playerZone = arenaManager.GetPlayerZone(PlayerID);
+
         //si on est pas le masterclient, on ne fait rien
         if (!PhotonNetwork.isMasterClient && PhotonNetwork.connected)
         {

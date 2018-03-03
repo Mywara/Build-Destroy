@@ -43,4 +43,5 @@ MonoBehaviour:
   - RequestForPickupTimes
   - TaggedPlayer
   - CreateArena
+  - NewPlayerRdy
   DisableAutoOpenWizard: 1
