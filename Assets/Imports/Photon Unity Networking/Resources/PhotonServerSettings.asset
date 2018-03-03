@@ -11,10 +11,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f3758f8f58fdef43803eb9be1df0608, type: 3}
   m_Name: PhotonServerSettings
   m_EditorClassIdentifier: 
-  AppID: 058bba78-d122-45d4-ae31-543afd37b07a
+  AppID: 
   VoiceAppID: 
   ChatAppID: 
-  HostType: 1
+  HostType: 0
   PreferredRegion: 0
   EnabledRegions: -1
   Protocol: 0
@@ -26,6 +26,7 @@ MonoBehaviour:
   PunLogging: 0
   NetworkLogging: 1
   RunInBackground: 1
+<<<<<<< HEAD
   RpcList:
   - Chat
   - ColorRpc
@@ -45,3 +46,7 @@ MonoBehaviour:
   - CreateArena
   - NewPlayerRdy
   DisableAutoOpenWizard: 1
+=======
+  RpcList: []
+  DisableAutoOpenWizard: 0
+>>>>>>> master
