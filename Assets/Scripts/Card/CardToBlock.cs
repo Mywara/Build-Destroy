@@ -9,7 +9,7 @@ public class CardToBlock : MonoBehaviour {
     public void CardToObject(GameObject cardPrefab)
     {
         //obtenir la souris
-        GameObject prefab = cardPrefab.getComponent<CardDisplay>().cardObject;
+        GameObject prefab = cardPrefab.GetComponent<CardDisplay>().BlockPrefab;
         GameObject item = Instantiate(prefab, Vector3.zero, Quaternion.identity);
         //mettre la souris en enfant
         Destroy(cardPrefab);
