@@ -30,5 +30,9 @@ public class ObjectMouvement : MonoBehaviour {
             z = z - (float)00000.1;
             cube.transform.position = new Vector3(cube.transform.position.x, cube.transform.position.y, z);
         }
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Destroy(this);
+        }
     }
 }
