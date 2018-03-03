@@ -26,6 +26,7 @@ public class ArenaManager : Photon.PunBehaviour {
         }
 
         nbPlayers = PhotonNetwork.room.MaxPlayers;
+        Debug.Log("Nb players : " + nbPlayers);
         CreateArena();
     }
 
@@ -41,6 +42,23 @@ public class ArenaManager : Photon.PunBehaviour {
 
     //[PunRPC]
     public void CreateArena() {
+
+        if(nbPlayers == 2)
+        {
+            for (int i = 0; i < 2; i++)
+            {
+                // instanciation de la zone de jeu
+                GameObject playerZone = PhotonNetwork.Instantiate("PlayerZone", new Vector3(Mathf.Pow(-1, i) * distanceBetweenPlayers / 2f, 0f, 0f), Quaternion.identity, 0);
+
+                // la zone de jeu créée est définie comme fille du GameObject Arena auquel est rattaché ce script
+                playerZone.transform.parent = gameObject.transform;
+
+                // ajout de la zone de jeu créée à la liste du manager
+                playerZonesList.Add(playerZone);
+            }
+
+            return;
+        }
 
         // calcul de l'angle séparant deux joueurs
         float angleBetweenPlayers = 2 * Mathf.PI / nbPlayers;
