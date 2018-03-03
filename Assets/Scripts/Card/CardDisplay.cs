@@ -7,7 +7,6 @@ public class CardDisplay : MonoBehaviour
     public Card card;
     public GameObject blockPrefab;
     public Text costText;
-    public Image image;
     public Button b;
     public Vector3 mousePos;
 
@@ -20,7 +19,7 @@ public class CardDisplay : MonoBehaviour
     }
 
     /// <summary>
-    /// Sets the cost texte and the image to the correct values
+    /// Sets the cost text and the image to the correct values
     /// </summary>
     public void SetCard()
     {

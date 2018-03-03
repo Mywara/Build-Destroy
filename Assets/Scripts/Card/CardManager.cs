@@ -15,9 +15,9 @@ public class CardManager : MonoBehaviour
         {
             if (_instance == null)
             {
-                if (GameObject.Find("MoneySystem"))
+                if (GameObject.Find("CardManager"))
                 {
-                    GameObject g = GameObject.Find("MoneySystem");
+                    GameObject g = GameObject.Find("CardManager");
                     if (g.GetComponent<CardManager>())
                     {
                         _instance = g.GetComponent<CardManager>();
