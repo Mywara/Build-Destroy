@@ -35,3 +35,4 @@ sysinfo.txt
 
 # Mac system files
 .DS_Store
+*.meta

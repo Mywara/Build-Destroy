@@ -12,7 +12,7 @@ public class FloorGen : MonoBehaviour {
     private const int MAX_WINTH = 10;
     public GameObject floor;
 	// Use this for initialization
-	void Start () {
+	void Start() {
         RandomGen largeurScaler = new RandomGen(MIN_WINTH, MAX_WINTH);
         int largeur = largeurScaler.GetNbr();
         RandomGen longueurScaler = new RandomGen(MIN_WINTH, MAX_WINTH);
