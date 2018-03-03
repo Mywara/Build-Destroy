@@ -38,4 +38,11 @@ MonoBehaviour:
   - PunRespawn
   - RequestForPickupItems
   - RequestForPickupTimes
+  - BuildPhase
+  - DestructionPhase
+  - DrawPhase
+  - StealPhase
+  - Turn
+  - UpgradePhase
+  - ResetPhase
   DisableAutoOpenWizard: 1

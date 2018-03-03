@@ -443,6 +443,11 @@ Prefab:
       propertyPath: m_AnchorMax.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114009379742186368, guid: 021c4123b0a0f50469a381c0d6dbd4a1,
+        type: 2}
+      propertyPath: LevelToLoad
+      value: TestCamera
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 021c4123b0a0f50469a381c0d6dbd4a1, type: 2}
   m_IsPrefabParent: 0

@@ -11,6 +11,7 @@ public class PartyManager : Photon.PunBehaviour {
     public float destructionPhaseTime = 5f;
     public float upgradePhaseTime = 5f;
     public Text phaseName;
+    public Button readyForNewPhase;
 
     private int nbMaxPlayer;
     private int nbPlayerReady;
@@ -20,6 +21,7 @@ public class PartyManager : Photon.PunBehaviour {
     private bool buildPhase = false;
     private bool destructionPhase = false;
     private bool upgradePhase = false;
+    private bool iAmReady = false;
 
     private void Awake()
     {
@@ -33,6 +35,8 @@ public class PartyManager : Photon.PunBehaviour {
             nbMaxPlayer = 1;
         }
         nbPlayerReady = 0;
+        readyForNewPhase.GetComponent<Image>().color = Color.red;
+        UpdateReadyButtonText();
     }
     // Use this for initialization
     void Start () {
@@ -46,60 +50,101 @@ public class PartyManager : Photon.PunBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        if(!PhotonNetwork.isMasterClient && PhotonNetwork.connected)
+        {
+            return;
+        }
 		if(drawPhase)
         {
+            //si on est dans la phase de pioche et que le timer à fini, ou que tous les joueurs sont rdy
+            //on change de phase
             if (Time.time > startPhaseTime + drawPhaseTime || nbPlayerReady == nbMaxPlayer)
             {
-                nbPlayerReady = 0;
                 drawPhase = false;
-                StealPhase();
+                photonView.RPC("ResetPhase", PhotonTargets.AllViaServer);
+                if (PhotonNetwork.connected)
+                {
+                    photonView.RPC("StealPhase", PhotonTargets.AllViaServer);
+                }
+                else
+                {
+                    StealPhase();
+                } 
             }
         }
         else if (stealPhase)
         {
             if (Time.time > startPhaseTime + stealPhaseTime || nbPlayerReady == nbMaxPlayer)
             {
-                nbPlayerReady = 0;
                 stealPhase = false;
-                BuildPhase();
+                photonView.RPC("ResetPhase", PhotonTargets.AllViaServer);
+                if (PhotonNetwork.connected)
+                {
+                    photonView.RPC("BuildPhase", PhotonTargets.AllViaServer);
+                }
+                else
+                {
+                    BuildPhase();
+                }
             }
         }
         else if (buildPhase)
         {
             if (Time.time > startPhaseTime + buildPhaseTime || nbPlayerReady == nbMaxPlayer)
             {
-                nbPlayerReady = 0;
                 buildPhase = false;
-                DestructionPhase();
+                photonView.RPC("ResetPhase", PhotonTargets.AllViaServer);
+                if (PhotonNetwork.connected)
+                {
+                    photonView.RPC("DestructionPhase", PhotonTargets.AllViaServer);
+                }
+                else
+                {
+                    DestructionPhase();
+                }
             }
         }
         else if (destructionPhase)
         {
             if (Time.time > startPhaseTime + destructionPhaseTime || nbPlayerReady == nbMaxPlayer)
             {
-                nbPlayerReady = 0;
                 destructionPhase = false;
-                UpgradePhase();
+                photonView.RPC("ResetPhase", PhotonTargets.AllViaServer);
+                if (PhotonNetwork.connected)
+                {
+                    photonView.RPC("UpgradePhase", PhotonTargets.AllViaServer);
+                }
+                else
+                {
+                    UpgradePhase();
+                }
             }
         }
         else if (upgradePhase)
         {
             if (Time.time > startPhaseTime + upgradePhaseTime || nbPlayerReady == nbMaxPlayer)
             {
-                nbPlayerReady = 0;
                 upgradePhase = false;
-                Turn();
+                photonView.RPC("ResetPhase", PhotonTargets.AllViaServer);
+                if (PhotonNetwork.connected)
+                {
+                    photonView.RPC("Turn", PhotonTargets.AllViaServer);
+                }
+                else
+                {
+                    Turn();
+                }
             }
         }
     }
-
+    [PunRPC]
     private void Turn()
     {
         Debug.Log("Turn Started");
         DrawPhase();
     }
 
-    //[PunRPC]
+    [PunRPC]
     private void DrawPhase()
     {
         startPhaseTime = Time.time;
@@ -107,7 +152,7 @@ public class PartyManager : Photon.PunBehaviour {
         drawPhase = true;
     }
 
-    //[PunRPC]
+    [PunRPC]
     private void StealPhase()
     {
         startPhaseTime = Time.time;
@@ -115,7 +160,7 @@ public class PartyManager : Photon.PunBehaviour {
         stealPhase = true;
     }
 
-    //[PunRPC]
+    [PunRPC]
     private void BuildPhase()
     {
         startPhaseTime = Time.time;
@@ -123,7 +168,7 @@ public class PartyManager : Photon.PunBehaviour {
         buildPhase = true;
     }
 
-    //[PunRPC]
+    [PunRPC]
     private void DestructionPhase()
     {
         startPhaseTime = Time.time;
@@ -131,7 +176,7 @@ public class PartyManager : Photon.PunBehaviour {
         destructionPhase = true;
     }
 
-    //[PunRPC]
+    [PunRPC]
     private void UpgradePhase()
     {
         startPhaseTime = Time.time;
@@ -154,13 +199,55 @@ public class PartyManager : Photon.PunBehaviour {
     
     public void Ready()
     {
-        photonView.RPC("NewPlayerRdy", PhotonTargets.AllViaServer);
+        if(iAmReady)
+        {
+            return;
+        }
+        iAmReady = true;
+        //Debug.Log("New player ready");
+        //augmente le nombre de joueur pret pour la prochaine phase (en reseau et en local)
+        if(PhotonNetwork.connected)
+        {
+            photonView.RPC("NewPlayerRdy", PhotonTargets.AllViaServer);
+        }
+        else
+        {
+            NewPlayerRdy();
+        }
+        //modification visuel du bouton pret -> rouge = pas pret / vert = pret
+        if(readyForNewPhase != null)
+        {
+            if(iAmReady)
+            {
+                readyForNewPhase.GetComponent<Image>().color = Color.green;
+            }
+        }
+        else
+        {
+            Debug.Log("Party manage miss the button ready for new phase");
+        }
     }
 
     [PunRPC]
     private void NewPlayerRdy()
     {
         nbPlayerReady++;
+        //Debug.Log("nb player ready / max player : " + nbPlayerReady + " / " + nbMaxPlayer);
+        UpdateReadyButtonText();
     }
 
+    //reset la parametre au changement de phase
+    [PunRPC]
+    private void ResetPhase()
+    {
+        iAmReady = false;
+        nbPlayerReady = 0;
+        readyForNewPhase.GetComponent<Image>().color = Color.red;
+        UpdateReadyButtonText();
+    }
+
+    private void UpdateReadyButtonText()
+    {
+        readyForNewPhase.GetComponentInChildren<Text>().text = "Ready ( " + nbPlayerReady + " / " + nbMaxPlayer + " )";
+    }
 }
