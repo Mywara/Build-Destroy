@@ -11,10 +11,10 @@ public class ArchGen : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        RandomGen depthScaler = new RandomGen(MIN_DEPTH, MAX_DEPTH);
+       /* RandomGen depthScaler = new RandomGen(MIN_DEPTH, MAX_DEPTH);
         int depth = depthScaler.GetNbr();
         RandomGen radiusScaler = new RandomGen(MIN_RADIUS, MAX_RADIUS);
-        int radius = radiusScaler.GetNbr();
+        int radius = radiusScaler.GetNbr();*/
        // Instantiate(Arch, new Vector3(radius, 1, depth, 6), Quaternion.identity);
 	}
 	
