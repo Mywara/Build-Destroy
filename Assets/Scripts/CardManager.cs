@@ -25,7 +25,7 @@ public class CardManager : MonoBehaviour
     /// Method to be called when you need to draw a hand of card
     /// </summary>
     /// <param name="cards">Int for the number of cards the player is allowed in their hand this turn</param>
-    public void DrawHand(int cards)
+    public static void DrawHand(int cards)
     {
         // Finds all of the card slots in the player's UI
         foreach (var obj in GameObject.FindObjectsOfType<GameObject>().Where(o => o.tag == "Cards"))
@@ -44,5 +44,20 @@ public class CardManager : MonoBehaviour
             _cd.card = selectedCard;
             _cd.SetCard();
         }
+    }
+
+    /// <summary>
+    /// Method to be called when only one card needs to be drawn
+    /// </summary>
+    public static void DrawCard(GameObject obj)
+    {
+        CardDisplay _cd = obj.GetComponent<CardDisplay>();
+
+        // Randomly select a card from the possible card list
+        UnityEngine.Random.InitState(Time.frameCount);
+        var ranNum = UnityEngine.Random.Range(0, cardList.Count);
+        Card selectedCard = cardList[ranNum];
+        _cd.card = selectedCard;
+        _cd.SetCard();
     }
 }
