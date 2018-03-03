@@ -73,9 +73,7 @@ public class CardManager : MonoBehaviour
             CardDisplay _cd = obj.GetComponent<CardDisplay>();
 
             // Randomly select a card from the possible card list
-            UnityEngine.Random.InitState(Time.frameCount);
-            var ranNum = UnityEngine.Random.Range(0, cardList.Count);
-            Card selectedCard = cardList[ranNum];
+            Card selectedCard = SelectCard();
             _cd.SetCard(selectedCard);
         }
     }
@@ -89,9 +87,7 @@ public class CardManager : MonoBehaviour
         CardDisplay _cd = obj.GetComponent<CardDisplay>();
 
         // Randomly select a card from the possible card list
-        UnityEngine.Random.InitState(Time.frameCount);
-        var ranNum = UnityEngine.Random.Range(0, cardList.Count);
-        Card selectedCard = cardList[ranNum];
+        Card selectedCard = SelectCard();
         _cd.SetCard(selectedCard);
     }
 
@@ -106,5 +102,16 @@ public class CardManager : MonoBehaviour
         item.transform.localPosition = Vector3.zero;
 
         CardManager._instance.DrawCard(item);
+    }
+
+    /// <summary>
+    /// Method used to randomly select a card to be added to the player's hand
+    /// </summary>
+    public Card SelectCard()
+    {
+        UnityEngine.Random.InitState(UnityEngine.Random.Range(0, 4096));
+        var ranNum = UnityEngine.Random.Range(0, cardList.Count);
+        Card selectedCard = cardList[ranNum];
+        return selectedCard;
     }
 }
