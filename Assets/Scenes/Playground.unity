@@ -395,6 +395,21 @@ Prefab:
       propertyPath: targetToRotateAround
       value: 
       objectReference: {fileID: 1818078596}
+    - target: {fileID: 114621015983947884, guid: 3fa9578ed19a85945aa0eef8a2dda84f,
+        type: 2}
+      propertyPath: minDistance
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 114621015983947884, guid: 3fa9578ed19a85945aa0eef8a2dda84f,
+        type: 2}
+      propertyPath: startDistance
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 114621015983947884, guid: 3fa9578ed19a85945aa0eef8a2dda84f,
+        type: 2}
+      propertyPath: maxDistance
+      value: 50
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3fa9578ed19a85945aa0eef8a2dda84f, type: 2}
   m_IsPrefabParent: 0
