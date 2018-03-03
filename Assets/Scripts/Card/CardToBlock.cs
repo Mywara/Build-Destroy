@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class CardToBlock : MonoBehaviour {
 
 
-    public void CardToObject(GameObject cardPrefab)
+    /*public void CardToObject(GameObject cardPrefab)
     {
 <<<<<<< HEAD
         //obtenir la souris
@@ -22,7 +22,7 @@ public class CardToBlock : MonoBehaviour {
         Destroy(cardPrefab);
 >>>>>>> master
 
-    }
+    }*/
     // Use this for initialization
     void Start () {
 		
@@ -30,10 +30,10 @@ public class CardToBlock : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        }
-
 
     }
+
+}
 
 
 
