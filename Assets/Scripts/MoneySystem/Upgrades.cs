@@ -96,11 +96,13 @@ public class Upgrades : MonoBehaviour {
 
     public void drawACard()
     {
-        if (MoneySystem.instance.BuyItem(cost_draw_card))
+        if (CardManager.instance.cardInHand.Count < CardManager.instance.handSize)
         {
-            manageUI.UpdateMoney();
-            CardManager.instance.AddCard();
-
+            if (MoneySystem.instance.BuyItem(cost_draw_card))
+            {
+                manageUI.UpdateMoney();
+                CardManager.instance.AddCard();
+            }
         }
     }
 

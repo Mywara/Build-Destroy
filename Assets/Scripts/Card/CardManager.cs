@@ -30,7 +30,7 @@ public class CardManager : MonoBehaviour
                 else
                 {
                     GameObject g = new GameObject();
-                    g.name = "MoneySystem";
+                    g.name = "CardManager";
                     _instance = g.AddComponent<CardManager>();
                 }
             }

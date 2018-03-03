@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 61995482717654174}
   - component: {fileID: 114620138262758290}
   - component: {fileID: 114235376346135424}
+  - component: {fileID: 114043160854060036}
   m_Layer: 5
   m_Name: CardPrefab 1
   m_TagString: Cards
@@ -89,6 +90,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &114043160854060036
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1067308992562758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d225ea3e5afa234f9ad25adc1f988a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  detroyObject: {fileID: 0}
+  prefab: {fileID: 1017521981602020, guid: 055f59100bc98784fbf1a5a7915ad2a9, type: 2}
 --- !u!114 &114080313902988096
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -217,7 +231,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114235376346135424}
+      - m_Target: {fileID: 114043160854060036}
         m_MethodName: DestroyAndCreate
         m_Mode: 1
         m_Arguments:
