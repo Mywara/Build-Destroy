@@ -13,8 +13,11 @@ public class Upgrades : MonoBehaviour {
     private int cost_more_cards;     //Depends on number of cards in hands
     private int cost_more_stocks;    //Depends on number of stock
     private int cost_hidden_card;    //Depends on number of cards hidden and number of cards in hands
+    private int cost_draw_card;
+    private bool draw_A_Card = false;
     private int nbUpgrades = 1;
     public Text plusIncome;
+    public PartyManager manageUI;
 
 
     public void Awake()
@@ -91,9 +94,11 @@ public class Upgrades : MonoBehaviour {
 
     public void drawACard()
     {
-        while (true)
+        if (MoneySystem.instance.BuyItem(cost_draw_card) && draw_A_Card == false)
         {
-            ;
+            CardManager.instance.AddCard();
+            manageUI.UpdateMoney();
+            draw_A_Card = true;
         }
     }
 
