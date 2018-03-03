@@ -589,7 +589,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -0.00003051804, y: 2}
+  m_AnchoredPosition: {x: -0.00000728083, y: 2}
   m_SizeDelta: {x: 0, y: 95}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1336692843
@@ -652,9 +652,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 1355956419}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: badfca40a039ee54396891aca6dad724, type: 3}
+  m_Script: {fileID: 11500000, guid: c2c825186b0ee7f49b09fb2904c50590, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cardList:
+  - {fileID: 11400000, guid: 15745d5476fbf8942a98dd9155532c7c, type: 2}
+  - {fileID: 11400000, guid: 2a2dc818a4caa484186ee9675707be2b, type: 2}
+  - {fileID: 11400000, guid: fd53814ace109b8449d1d145e88975c2, type: 2}
+  - {fileID: 11400000, guid: 9ff5a8f80c4ed1d48beade09eb5fe30d, type: 2}
+  - {fileID: 11400000, guid: 8aec3f58c51890a4ebc2f2209fb34374, type: 2}
+  - {fileID: 11400000, guid: 2d707fc65cf614445afaa768ec49960f, type: 2}
+  - {fileID: 11400000, guid: 7afad69d2965ea84a966730af6004da8, type: 2}
+  - {fileID: 11400000, guid: a81e8862b36ee7649b76e091d096cf4d, type: 2}
+  - {fileID: 11400000, guid: 33f35a2d177161e42801601d01135084, type: 2}
+  cardSlotPrefab: {fileID: 1067308992562758, guid: f81bf710319ca5e47b1d51092a5dde6d,
+    type: 2}
+  grid: {fileID: 1336692844}
 --- !u!224 &1355956421
 RectTransform:
   m_ObjectHideFlags: 0
