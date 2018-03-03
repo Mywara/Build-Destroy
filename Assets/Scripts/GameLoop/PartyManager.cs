@@ -22,6 +22,7 @@ public class PartyManager : Photon.PunBehaviour {
     public Text timerUpgrade;
     public Text money;
     public Text moneyUpgrade;
+    public Upgrades upgcost;
 
     private GameObject playerZone;
     private CameraController camController;
@@ -284,12 +285,14 @@ public class PartyManager : Photon.PunBehaviour {
             if(PhotonNetwork.isMasterClient)
             {
                 photonView.RPC("AddMoney", PhotonTargets.AllViaServer, MoneySystem.instance.actualIncome);
+                upgcost.showIncome();
             }
         }
         else
         {
             ChangeToBasicUI();
             AddMoney(MoneySystem.instance.actualIncome);
+            upgcost.showIncome();
         }
 
         DrawPhase();
@@ -298,6 +301,7 @@ public class PartyManager : Photon.PunBehaviour {
     [PunRPC]
     private void DrawPhase()
     {
+        
         startPhaseTime = Time.time;
         UpdatePhaseName("Draw Phase");
         drawPhase = true;
@@ -306,6 +310,7 @@ public class PartyManager : Photon.PunBehaviour {
     [PunRPC]
     private void StealPhase()
     {
+        upgcost.eraseIncome();
         startPhaseTime = Time.time;
         UpdatePhaseName("Steal Phase");
         stealPhase = true;
@@ -488,11 +493,13 @@ public class PartyManager : Photon.PunBehaviour {
             basicUI.enabled = false;
             upgradeUI.enabled = true;
             UpdateMoneyUpgrade();
+            upgcost.updateCostText();
         }
         else
         {
             Debug.Log("Missing basicUI or UpgradeUI on partyManager");
         }
+
     }
 
     //on désactive l'UI d'upgrade, pour mettre l'UI de base
@@ -513,7 +520,7 @@ public class PartyManager : Photon.PunBehaviour {
     //Met à jour le UI Text avec l'argent du joueur
     private void UpdateMoney()
     {
-        money.text = MoneySystem.GetMoney() + " $";
+        money.text = "Money : " + MoneySystem.GetMoney() + " $";
     }
 
     //Met à jour le UI Text du menu d'upgrade avec l'argent du joueur

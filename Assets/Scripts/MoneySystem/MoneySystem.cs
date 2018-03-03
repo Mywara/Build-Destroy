@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,7 +8,6 @@ public class MoneySystem : MonoBehaviour {
 
     private static MoneySystem _instance;
     public int money;
-    //public  Text currency;
     public int baseIncome = 15000;
     public int actualIncome;
 
@@ -55,12 +55,12 @@ public class MoneySystem : MonoBehaviour {
         gameObject.name = "MoneySystem";
         _instance = this;
 
-        //load the saved money
-        AddMoney(PlayerPrefs.GetInt("MoneySave", 0));
+        //Load the saved money from last game
+        //AddMoney(PlayerPrefs.GetInt("MoneySave", 0));
 
         //Update Money
         actualIncome = baseIncome;
-        //SaveMoney();
+        SaveMoney();
     }
 
 
@@ -69,16 +69,15 @@ public class MoneySystem : MonoBehaviour {
     public void SaveMoney()
     {
             PlayerPrefs.SetInt("MoneySave", instance.money);
-            //currency.text = "Money : " + money.ToString() + "$";
     }
 
     //Checks if you have enough money to buy item with cost, if you do buy it and return true. Otherwise, return false.
     public bool BuyItem(int cost)
     {
-        if (instance.money - cost >= 0)
+        if (instance.money >= cost)
         {
             instance.money -= cost;
-            //SaveMoney();
+            SaveMoney();
             return true;
         }
         else
@@ -97,7 +96,7 @@ public class MoneySystem : MonoBehaviour {
     public void AddMoney(int amount)
     {
         instance.money += amount;
-        //SaveMoney();
+        SaveMoney();
     }
 
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 public class CardToBlock : MonoBehaviour
 {
     public void CardToObject(GameObject cardPrefab)
@@ -15,16 +16,19 @@ public class CardToBlock : MonoBehaviour
         //mettre la souris en enfant
         Destroy(cardPrefab);
 
+
     }
     // Use this for initialization
-    void Start()
-    {
+
+    void Start () {
+		
+	}
+	
+	// Update is called once per frame
+	void Update () {
 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 }
+
+ 
