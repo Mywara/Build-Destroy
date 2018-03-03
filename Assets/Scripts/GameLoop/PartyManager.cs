@@ -27,7 +27,7 @@ public class PartyManager : Photon.PunBehaviour {
 
     private GameObject playerZone;
     private CameraController camController;
-    private int PlayerID = 1;
+    public int PlayerID = 1;
     private int nbMaxPlayer;
     private int nbPlayerReady;
     private float startPhaseTime;
