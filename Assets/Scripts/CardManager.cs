@@ -33,16 +33,14 @@ public class CardManager : MonoBehaviour
             cardInHand.Add(obj);
         }
 
-        /*
-         Needs a randomizer to select the cards from the possible cards list
-         and add it to the cardInHand object
-        */
         foreach(var obj in cardInHand)
         {
             CardDisplay _cd = obj.GetComponent<CardDisplay>();
 
-            // Randomly select a card from the possible card list, the index 0 should be replaced by the random number
-            Card selectedCard = cardList[0];
+            // Randomly select a card from the possible card list
+            UnityEngine.Random.InitState(Time.frameCount);
+            var ranNum = UnityEngine.Random.Range(0, cardList.Count);
+            Card selectedCard = cardList[ranNum];
             _cd.card = selectedCard;
             _cd.SetCard();
         }
