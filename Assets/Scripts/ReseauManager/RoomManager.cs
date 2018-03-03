@@ -4,24 +4,29 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class RoomManager : Photon.PunBehaviour {
+    
+    static public RoomManager instance;
 
-
-    private GameObject roomManager;
     public Text roomActvies;
     public Text createRoomText;
     public Text numberText;
     public Text joinRoomText;
     public string LevelToLoad = "SceneTest";
 
-    public void Start()
+    public void Awake()
     {
-        roomManager = this.gameObject;
+        if (instance != null && instance != this)
+        {
+            Debug.Log("There already is a RoomManager");
+            Destroy(this.gameObject);
+            return;
+        }
+        instance = this;
     }
 
 
     public void Update()
     {
-        
   
     }
 

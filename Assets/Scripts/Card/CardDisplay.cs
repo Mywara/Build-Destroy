@@ -6,9 +6,10 @@ public class CardDisplay : MonoBehaviour
 
     // Variable declarations
     public Card card;
-
+    public GameObject cardObject;
     public Text costText;
     public Image image;
+    public Button b;
 
     public GameObject cardSlotPrefab;
     public GridLayoutGroup grid;
@@ -17,12 +18,14 @@ public class CardDisplay : MonoBehaviour
     private void Start()
     {
         SetCard();
+        b.GetComponentInChildren<Button>();
+        cardObject = card.blockPrefab;
     }
 
     public void SetCard()
     {
         costText.text = card.cost;
-        image.sprite = card.image;
+        b.image.sprite = card.image;
     }
 
     public void AddCard()
@@ -35,11 +38,4 @@ public class CardDisplay : MonoBehaviour
         CardManager._instance.DrawCard(item);
     }
 
-    // When the mouse is clicked
-    public void OnMouseDown()
-    {
-        // Instantiate the GameObject stored in card.cardPrefab
-        // Call the instantiation from the prefab script
-        // Use the buyItem method from the moneySystem
-    }
 }

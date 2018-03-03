@@ -9,11 +9,12 @@ public class ArenaManager : Photon.PunBehaviour {
     public int nbPlayers;
 
     public List<GameObject> playerZonesList;
+    public List<string> playerNamesList;
 
     void Awake() {
         if(instance != null && instance != this)
         {
-            Debug.Log("There already is a RoomManager");
+            Debug.Log("There already is an ArenaManager");
             Destroy(this.gameObject);
             return;
         }
@@ -26,7 +27,10 @@ public class ArenaManager : Photon.PunBehaviour {
         }
 
         nbPlayers = PhotonNetwork.room.MaxPlayers;
+        Debug.Log("Nb players : " + nbPlayers);
         CreateArena();
+
+        photonView.RPC("AddPlayerName", PhotonTargets.AllBufferedViaServer, PlayerPrefs.GetString("PlayerName"));
     }
 
 	// Use this for initialization
@@ -36,11 +40,46 @@ public class ArenaManager : Photon.PunBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+        
 	}
 
-    //[PunRPC]
+    [PunRPC]
+    public void AddPlayerName(string playerName) {
+        playerNamesList.Add(playerName);
+    }
+
     public void CreateArena() {
+
+        if(nbPlayers == 1)
+        {
+            // instanciation de la zone de jeu
+            GameObject playerZone = PhotonNetwork.Instantiate("PlayerZone", Vector3.zero, Quaternion.identity, 0);
+
+            // la zone de jeu créée est définie comme fille du GameObject Arena auquel est rattaché ce script
+            playerZone.transform.parent = gameObject.transform;
+
+            // ajout de la zone de jeu créée à la liste du manager
+            playerZonesList.Add(playerZone);
+
+            return;
+        }
+
+        if(nbPlayers == 2)
+        {
+            for (int i = 0; i < 2; i++)
+            {
+                // instanciation de la zone de jeu
+                GameObject playerZone = PhotonNetwork.Instantiate("PlayerZone", new Vector3(Mathf.Pow(-1, i) * distanceBetweenPlayers / 2f, 0f, 0f), Quaternion.identity, 0);
+
+                // la zone de jeu créée est définie comme fille du GameObject Arena auquel est rattaché ce script
+                playerZone.transform.parent = gameObject.transform;
+
+                // ajout de la zone de jeu créée à la liste du manager
+                playerZonesList.Add(playerZone);
+            }
+
+            return;
+        }
 
         // calcul de l'angle séparant deux joueurs
         float angleBetweenPlayers = 2 * Mathf.PI / nbPlayers;

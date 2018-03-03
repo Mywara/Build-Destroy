@@ -29,7 +29,7 @@ public class CameraController : MonoBehaviour {
     {
         float horiInput = Input.GetAxis("Horizontal");
         float upInput = Input.GetAxis("Vertical");
-        rotY += Time.deltaTime * horizontalSpeed * horiInput;
+        rotY -= Time.deltaTime * horizontalSpeed * horiInput;
         moveUp = Time.deltaTime * upAndDownSpeed * upInput;
         if (Input.GetKey(KeyCode.R))
         {
